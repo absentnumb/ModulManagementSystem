@@ -4,7 +4,7 @@ public class Deadline {
 
 	private int id;
 	private String datum;
-	private String pdf;     
+	private String pdf;   
 	
 	
 	
