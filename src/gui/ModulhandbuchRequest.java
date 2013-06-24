@@ -4,24 +4,21 @@ import java.util.LinkedList;
 
 import com.vaadin.terminal.ExternalResource;
 import com.vaadin.terminal.FileResource;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.Layout;
-import com.vaadin.ui.Link;
-import com.vaadin.ui.ListSelect;
-import com.vaadin.ui.PasswordField;
-import com.vaadin.ui.TextField;
-import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Window;
+import com.vaadin.ui.*;
+import com.vaadin.ui.themes.BaseTheme;
+import com.vaadin.ui.themes.Runo;
 
 import control.ModuleHandbook;
 
 public class ModulhandbuchRequest extends LoginApplication implements Button.ClickListener {
 	
-	Window mod;
-	Button recommend = new Button("anfordern");
+	Window mod;	
+	/*Button recommend = new Button("anfordern");
 	Button okay2;
-	VerticalLayout mlist = new VerticalLayout();
+	VerticalLayout mlist = new VerticalLayout();*/
+	private Button recommend,back, okay2;
+	private Label label;
+	private AbsoluteLayout mainLayout;
 	private String [] tmp;
 	private LinkedList<Integer> tmp2;
 	
@@ -34,11 +31,13 @@ public class ModulhandbuchRequest extends LoginApplication implements Button.Cli
 		tmp2 = ids;
 		mod = new Window("Modul auswählen");
 		start.addWindow(mod);
-		mod.setContent(mlist);
-		recommend.addListener(this);
+		/*mod.setContent(mlist);
+		recommend.addListener(this);*/
 		openModuleList(list);
-		mlist.addComponent(recommend);
-		
+		buildMainLayout();
+		recommend.addListener(this);		
+		mod.setContent(mainLayout);
+		//mlist.addComponent(recommend);				
 		Window old = start.getWindow("main");
 		old.open(new ExternalResource(mod.getURL()));
 		//start.removeWindow(old);	
@@ -97,8 +96,59 @@ public class ModulhandbuchRequest extends LoginApplication implements Button.Cli
 				System.out.println("recommend");
 			}
     	}
-    	
+    	if(event.getButton()== back){
+    		start.getMainWindow().getApplication().close();      
+    	}    	
     }
+    
+    private AbsoluteLayout buildMainLayout() {
+    	    // common part: create layout
+    	    mainLayout = new AbsoluteLayout();
+    	    mainLayout.setImmediate(false);
+    	    mainLayout.setWidth("100%");
+    	    mainLayout.setHeight("100%");
+    	    mainLayout.setMargin(false);
+    	    
+    	    // top-level component properties
+    	    mainLayout.setWidth("100.0%");
+    	    mainLayout.setHeight("100.0%");
+    	    
+    	    // label
+    	    label = new Label();
+    	    label.setImmediate(false);
+    	    label.setWidth("-1px");
+    	    label.setHeight("-1px");
+    	    label.setValue("Modul auswählen");
+    	    label.setStyleName(Runo.LABEL_H1);
+    	    mainLayout.addComponent(label, "top:25.0%;left:35.0%;");
+    	    
+    	    // modules    
+    	    modules.setImmediate(false);
+    	    modules.setWidth("46.0%");
+    	    modules.setHeight("70.0%");
+    	    mainLayout.addComponent(modules, "top:35.0%;left:35.0%;");
+    	    
+    	    // recommend
+    	    recommend = new Button();
+    	    recommend.setCaption("ansehen");
+    	    recommend.setImmediate(true);
+    	    recommend.setWidth("-1px");
+    	    recommend.setHeight("-1px");
+    	    mainLayout.addComponent(recommend, "top:83.0%;left:35.0%;");
+    	    
+    	    // logout
+    	    back = new Button();
+    	    back.setCaption("Startseite");
+    	    back.setImmediate(true);
+    	    back.setWidth("-1px");
+    	    back.setHeight("-1px");
+    	    back.setStyleName(BaseTheme.BUTTON_LINK);
+    	    back.addListener(this);
+    	    mainLayout.addComponent(back, "top:88.0%;left:35.0%;");
+    	    
+    	    return mainLayout;
+    	}
+    
     //Fehlerfenster wenn kein Modul ausgewählt wird
     public void displaySelectionError() {
     	

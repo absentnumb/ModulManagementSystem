@@ -17,10 +17,10 @@ import control.Controller;
 
 public class UserRightAdministration extends Startseite implements Button.ClickListener {
 	
-	private Button speichern,aendern,logout;
+	private Button speichern,aendern,logout,okay;
 	private Label label;
 	OptionGroup group;
-	Window auswahlW, admin;
+	Window auswahlW, admin, errW;
 	//private VerticalLayout vertical;
 	private AbsoluteLayout mainLayout;
 	ListSelect benutzer;
@@ -121,12 +121,17 @@ public class UserRightAdministration extends Startseite implements Button.ClickL
 			}
 	
 			if(aus == ""){
-				System.out.println("Du bist zu blöd etwas auszuwählen !!!");	//"Fehlermeldung" ;)
+				selectError();
+				//System.out.println("Du bist zu blöd etwas auszuwählen !!!");	//"Fehlermeldung" ;)
 			}
 			else{
-			String blub = cont.rangAusgeben(aus);			
-			openRangWindow(blub);
+				String blub = cont.rangAusgeben(aus);			
+				openRangWindow(blub);
 			}
+		}
+		
+		if(event.getButton() == okay){
+			admin.removeWindow(errW);
 		}
 		
 		if(event.getButton() == logout){
@@ -156,6 +161,21 @@ public class UserRightAdministration extends Startseite implements Button.ClickL
 		aendern.addListener(this);
 		vertical.addComponent(benutzer);
 		vertical.addComponent(aendern);*/				
+	}
+	
+	//Fehlerfenster falls keinUser ausgewählt wurde
+	public void selectError() {      
+		errW = new Window("Fehler");
+	    okay = new Button("Ok");
+	    Label wrong = new Label("Wählen Sie bitte einen Nutzer aus.");
+	    Layout error = new VerticalLayout();	
+	    errW.setContent(error);
+	    errW.addComponent(wrong);
+	    errW.addComponent(okay);
+	    admin.addWindow(errW);
+	    errW.setHeight("200px");
+	    errW.setWidth("200px");
+	    okay.addListener(this);
 	}
 	
 	private AbsoluteLayout buildMainLayout() {
