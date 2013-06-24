@@ -27,7 +27,7 @@ public class ControllerDekan extends Controller{
 			modulDatabase.setSperr(modul.getid(), false);
 			Nachricht nachricht = new Nachricht(nachrichtenData.getNewId(), "Ihre Anfrage bezüglich des Moduls " +modul.gettitle()+" wurde angenommen.",modul.getdozid(), 0);
 			nachrichtenData.newNachricht(nachricht);
-			
+			  
 		}
 		else{	
 			modulDatabase.setSperr(modul.getid(), false);

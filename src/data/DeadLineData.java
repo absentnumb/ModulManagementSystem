@@ -15,7 +15,7 @@ public class DeadLineData extends KillConnections{
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();  
+			e.printStackTrace();    
 		}
 		
 		try {
