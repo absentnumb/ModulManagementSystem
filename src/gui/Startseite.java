@@ -86,8 +86,7 @@ public class Startseite implements Button.ClickListener{
 			//stichtag.addListener(this);			
 			//if(!cont.getDozent(userid)) start.addComponent(changeModule);
 			//start.addComponent(changes);
-			//if(!cont.getDozent(userid)) start.addComponent(declareDeputy);
-			
+			//if(!cont.getDozent(userid)) start.addComponent(declareDeputy);		
 			
 		}
 		if(cont.getDez2(userid)){
