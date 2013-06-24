@@ -202,7 +202,7 @@ public class Startseite implements Button.ClickListener{
 		}
 		
 		// button_8
-		button_9 = getButton();
+		button_9 = getButton();  
 		if(button_9!=nullButton){
 			button_9.setWidth("-1px");
 			button_9.setHeight("-1px");

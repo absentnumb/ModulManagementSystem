@@ -10,7 +10,7 @@ public class DeadLine extends Startseite implements Button.ClickListener {
 	Window dead;
 	String datumstr;
 	Label label;
-	TextField datum;
+	TextField datum;  
 	private Button ok;
 	private AbsoluteLayout lay;
 	public DeadLine(){

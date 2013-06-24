@@ -13,7 +13,7 @@ import data.*;
 
 public class ControllerDekan extends Controller{
 	
-	public ControllerDekan(){	
+	public ControllerDekan(){	  
 	}
 	
 	//bestätigt oder verwirft Änderung
