@@ -2,11 +2,13 @@ package control;
 
 import java.util.LinkedList;
 
+import objects.Benutzer;
+
 import gui.LoginApplication;
 import gui.ModulhandbuchRequest;
 import gui.Startseite;
 
-import data.Benutzer;
+import data.BenutzerData;
 import data.BookData;
 import data.BookName;
 import data.ModulDatabase;
@@ -26,12 +28,12 @@ public class Controller {
 	protected static int userid ;
 
 	
-	Benutzer blarghs;
+	BenutzerData blarghs;
 	
 	//Konstruktor
 	public Controller(){
 	
-		blarghs = new Benutzer();
+		blarghs = new BenutzerData();
 	}
 	
 	//Zugriff auf Datenbank-Klasse, holt sich Benutzerliste
@@ -133,7 +135,8 @@ public class Controller {
 		int stellid = 0;
 		int id = blarghs.getNewId();
 		
-		blarghs.newUser(id, us, p1, em, dozent, dekan, dez2, admin, stell, stellid);
+		Benutzer test = new Benutzer(id, us, p1, em, dozent, dekan, dez2, admin, stell, stellid);
+		blarghs.newUser(test);
 	}
 
 	//ruft Datenbankzugriffe für Modulhandbuchnamen und -ids auf, übergibt Loginapplication
@@ -152,6 +155,12 @@ public class Controller {
 		if(blarghs.getRangDekan(userid)) { blarghs.setRangDekan(ID, true); }
 		if(blarghs.getRangDez2(userid)) { blarghs.setRangDez2(ID, true); }
 		if(blarghs.getRangAdmin(userid)) { blarghs.setRangAdmin(ID, true); }
+	}
+	public void changeBenutzer(Benutzer neu){
+		
+		blarghs.deleteUser(neu.getId());
+		blarghs.newUser(neu);
+		
 	}
 
 }

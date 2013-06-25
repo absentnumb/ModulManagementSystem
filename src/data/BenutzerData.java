@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
-public class Benutzer extends KillConnections {
+import objects.Benutzer;
+
+public class BenutzerData extends KillConnections {
 	
 	Connection con;	
 	
@@ -25,9 +27,9 @@ public class Benutzer extends KillConnections {
 	private static final String SETNEWUSER = "INSERT INTO benutzer VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String GETNEWID = "SELECT id FROM benutzer ORDER BY id DESC LIMIT 1";
 	private static final String SETSTELLID = "UPDATE benutzer SET stellid=? WHERE id=?";
-	
+	private static final String DELETEU ="DELETE FROM benutzer WHERE = id=? "; 
 	//Konstruktor, baut Connection zur MySQL-Datenbank auf
-	public Benutzer(){
+	public BenutzerData(){
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -508,7 +510,7 @@ public class Benutzer extends KillConnections {
 	}
 
 	//neuer User wird generiert, verwendet: eingegebene Benutzerdaten, mit 0 initialisierte Rang-Booleans, generierte ID
-	public void newUser(int id, String us, String p1, String em, boolean dozent, boolean dekan, boolean dez2, boolean admin, boolean stell, int stellid) {
+	public void newUser(Benutzer neu) {
 		
 		PreparedStatement psmt = null;
 
@@ -518,16 +520,16 @@ public class Benutzer extends KillConnections {
 
 			psmt = con.prepareStatement(SETNEWUSER);
 			
-			psmt.setInt(1, id);
-			psmt.setString(2, us);
-			psmt.setString(3, p1);
-			psmt.setString(4, em);
-			psmt.setBoolean(5, dozent);
-			psmt.setBoolean(6, dekan);
-			psmt.setBoolean(7, dez2);
-			psmt.setBoolean(8, admin);
-			psmt.setBoolean(9, stell);
-			psmt.setInt(10, stellid);
+			psmt.setInt(1, neu.getId());
+			psmt.setString(2, neu.getName());
+			psmt.setString(3, neu.getPw());
+			psmt.setString(4, neu.getEmail());
+			psmt.setBoolean(5, neu.isDozent());
+			psmt.setBoolean(6, neu.isDekan());
+			psmt.setBoolean(7, neu.isDez2());
+			psmt.setBoolean(8, neu.isAdmin());
+			psmt.setBoolean(9, neu.isStell());
+			psmt.setInt(10, neu.getStellid());
 
 			psmt.executeUpdate();
 			con.commit();
@@ -594,4 +596,27 @@ public void setStellID(int Id, int StellId){
 			closeConnections(null, psmt);
 		}
 	}
+public void deleteUser(int Id){
+	
+	PreparedStatement psmt = null;
+	ResultSet data = null;
+
+	try {
+		con.setAutoCommit(false);
+
+		psmt = con.prepareStatement(DELETEU);
+		psmt.setInt(1, Id);
+
+		psmt.executeUpdate();
+		con.commit();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} catch (Exception e) {
+		e.printStackTrace();
+	} finally {
+		closeConnections(data, psmt);
+	}
+	
+}
+	
 }

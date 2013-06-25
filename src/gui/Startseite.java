@@ -10,7 +10,7 @@ import control.Controller;
 import control.ControllerDekan;
 import control.ControllerDozent;
 
-import data.Benutzer;
+import data.BenutzerData;
 
 public class Startseite implements Button.ClickListener{
 	Window start;
