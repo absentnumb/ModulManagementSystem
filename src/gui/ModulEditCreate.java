@@ -41,7 +41,7 @@ public class ModulEditCreate extends Startseite implements Button.ClickListener{
 		 language.setValue(b.getlanguage());
 		 createW.addComponent(language);
 		 
-		 turn= new TextArea("Rytmus:");
+		 turn= new TextArea("Rytmus:"); 
 		 turn.setValue(b.getturn());
 		 createW.addComponent(turn);
 		 
