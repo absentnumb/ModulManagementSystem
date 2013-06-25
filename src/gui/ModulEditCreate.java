@@ -45,17 +45,17 @@ public class ModulEditCreate extends Startseite implements Button.ClickListener{
 		 turn.setValue(b.getturn());
 		 createW.addComponent(turn);
 		 
-		 responsibleid = new TextArea("Verantwortlicher:");
+		 /*responsibleid = new TextArea(":");
 		 responsibleid.setValue(String.valueOf(b.getresponsibleid()));
-		 createW.addComponent(responsibleid);
+		 createW.addComponent(responsibleid);*/
 		 // direkte umsetzung von name in id wer schön
-		 responsible = new TextArea();
+		 responsible = new TextArea("Dekan:");
 		 responsible.setValue(b.getresponsible());
 		 createW.addComponent(responsible);
 		 
-		 dozid = new TextArea("");
+		/* dozid = new TextArea("");
 		 dozid.setValue(String.valueOf(b.getdozid()));
-		 createW.addComponent(dozid);
+		 createW.addComponent(dozid);*/
 		 
 		 doz = new TextArea("Dozent:");
 		 doz.setValue(b.getdoz());
@@ -120,9 +120,9 @@ public class ModulEditCreate extends Startseite implements Button.ClickListener{
 			String lp1 = (String)lp.getValue();
 			String language1 = (String)language.getValue();
 			String turn1 = (String)turn.getValue();
-			String responsibleid1 = (String)responsibleid.getValue();
+		//	String responsibleid1 = (String)responsibleid.getValue();
 			String responsible1 = (String)responsible.getValue();
-			String dozid1 = (String)dozid.getValue();
+		//  String dozid1 = (String)dozid.getValue();
 			String doz1 = (String)doz.getValue();
 			String filing1 = (String)filing.getValue();
 			String requirements1 = (String)requirements.getValue();
@@ -135,15 +135,14 @@ public class ModulEditCreate extends Startseite implements Button.ClickListener{
 			String formcond1 = (String)formcond.getValue();
 			String grades1 = (String)grades.getValue();
 			
-			int dozid2 = Integer.parseInt(dozid1);
 			int lp2 = Integer.parseInt(lp1);
-			int responsibleid2 = Integer.parseInt(responsibleid1);
+		
 			
 			
 			
 			
-			Modul tmp1 = new Modul(tmp.getid(), title1, lp2, language1, turn1, responsibleid2, 
-							responsible1, dozid2, doz1,filing1, requirements1, aims1, 
+			Modul tmp1 = new Modul(tmp.getid(), title1, lp2, language1, turn1, cont.getID(responsible1), 
+							responsible1, cont.getID(doz1), doz1,filing1, requirements1, aims1, 
 							content1, lit1, events1, work1, exams1, formcond1, grades1 );
 			System.out.println(tmp1.gettitle());
 			contD.speichernModul(tmp1);//Methode in Controller-Klasse
