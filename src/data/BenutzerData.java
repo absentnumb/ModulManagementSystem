@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 
 import objects.Benutzer;
+import objects.Modul;
 
 public class BenutzerData extends KillConnections {
 	
@@ -28,6 +29,7 @@ public class BenutzerData extends KillConnections {
 	private static final String GETNEWID = "SELECT id FROM benutzer ORDER BY id DESC LIMIT 1";
 	private static final String SETSTELLID = "UPDATE benutzer SET stellid=? WHERE id=?";
 	private static final String DELETEU ="DELETE FROM benutzer WHERE = id=? "; 
+	private static final String LOADBENUTZER = "SELECT * FROM benutzer WHERE id=?";
 	//Konstruktor, baut Connection zur MySQL-Datenbank auf
 	public BenutzerData(){
 		
@@ -616,6 +618,51 @@ public void deleteUser(int Id){
 	} finally {
 		closeConnections(data, psmt);
 	}
+	
+}
+public Benutzer loadBenutzer(int user){
+	
+	PreparedStatement psmt = null;
+	ResultSet data = null;
+
+	try {
+		con.setAutoCommit(false);
+
+		psmt = con.prepareStatement(LOADBENUTZER);
+		psmt.setInt(1, user);
+		
+		data = psmt.executeQuery();
+		data.next();
+		
+		int id = data.getInt("id");
+		String name = data.getString("name");
+		String pw = data.getString("pw");
+		String email = data.getString("email");
+		boolean dozent = data.getBoolean("dozent");
+		boolean dekan = data.getBoolean("dekan");
+		boolean dez2 = data.getBoolean("dez2");
+		boolean admin = data.getBoolean("admin");
+		boolean stell = data.getBoolean("stell");
+		
+		int stellid = data.getInt("stellid");
+
+		
+		Benutzer tmp = new Benutzer(id, name, pw, email , dozent, dekan, dez2,
+				  admin, stell, stellid);
+		return tmp;
+
+	} catch (SQLException e) {
+		e.printStackTrace();
+		return null;
+	} catch (Exception e) {
+		e.printStackTrace();
+		return null;
+	} finally {
+		closeConnections(data, psmt);
+		
+	}
+	
+
 	
 }
 	

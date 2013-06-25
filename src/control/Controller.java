@@ -162,5 +162,8 @@ public class Controller {
 		blarghs.newUser(neu);
 		
 	}
-
+	public Benutzer loadBenutzer(int userid1){
+		Benutzer tmp = blarghs.loadBenutzer(userid1);
+		return tmp;
+	}
 }

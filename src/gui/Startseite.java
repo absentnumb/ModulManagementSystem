@@ -1,5 +1,7 @@
 ﻿package gui;
 
+import objects.Benutzer;
+
 import com.vaadin.terminal.ExternalResource;
 import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
@@ -15,7 +17,7 @@ import data.BenutzerData;
 public class Startseite implements Button.ClickListener{
 	Window start;
 	Label welcome;
-	Button changeModule, declareDeputy, messages, changes, stichtag, viewChangeRequests, changeRights, viewChanges, logout,nullButton;
+	Button changeModule, declareDeputy, messages, changes, stichtag, viewChangeRequests, changeRights, viewChanges,changeBenutzer, nullButton, logout ;
 	private AbsoluteLayout mainLayout;
 	private int count;//Zähler für Buttons
 	//Benutzer user;
@@ -94,11 +96,13 @@ public class Startseite implements Button.ClickListener{
 			viewChangeRequests.addListener(this);
 			//start.addComponent(viewChangeRequests);
 		}		
+		changeBenutzer = new Button("Persönliche Daten ändern");
+		changeBenutzer.addListener(this);
 		
 		logout = new Button("logout");
 		logout.addListener(this);
 		
-		buildMainLayout();
+		mainLayout = buildMainLayout();
 		start.setContent(mainLayout);
 		//start.addComponent(logout);
 		
@@ -109,7 +113,7 @@ public class Startseite implements Button.ClickListener{
 	}
 
 	private AbsoluteLayout buildMainLayout() {
-		Button button_1,button_2,button_3,button_4,button_5,button_6,button_7,button_8,button_9;
+		Button button_1,button_2,button_3,button_4,button_5,button_6,button_7,button_8,button_9,button_10,button_11;
 		// common part: create layout
 		mainLayout = new AbsoluteLayout();
 		mainLayout.setImmediate(false);
@@ -207,8 +211,24 @@ public class Startseite implements Button.ClickListener{
 			button_9.setHeight("-1px");
 			button_9.setStyleName(BaseTheme.BUTTON_LINK);
 			mainLayout.addComponent(button_9, "top:75.0%;left:35.0%;");
+			
 		}
-		
+		button_10 = getButton();  
+		if(button_10!=nullButton){
+			button_10.setWidth("-1px");
+			button_10.setHeight("-1px");
+			button_10.setStyleName(BaseTheme.BUTTON_LINK);
+			mainLayout.addComponent(button_10, "top:75.0%;left:35.0%;");
+			
+		}
+		button_11 = getButton();  
+		if(button_11!=nullButton){
+			button_11.setWidth("-1px");
+			button_11.setHeight("-1px");
+			button_11.setStyleName(BaseTheme.BUTTON_LINK);
+			mainLayout.addComponent(button_11, "top:75.0%;left:35.0%;");
+			
+		}
 		return mainLayout;
 	}
 	
@@ -257,6 +277,10 @@ public class Startseite implements Button.ClickListener{
 		if(event.getButton()== logout){
 	       starta.getMainWindow().getApplication().close();
 			
+		}
+		if(event.getButton() == changeBenutzer){
+			Benutzer neu = cont.loadBenutzer(userid);
+			ChangeBenutzerData data = new ChangeBenutzerData(neu);
 		}
 	}
 	
