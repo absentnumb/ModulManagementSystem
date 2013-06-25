@@ -28,7 +28,7 @@ public class BenutzerData extends KillConnections {
 	private static final String SETNEWUSER = "INSERT INTO benutzer VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String GETNEWID = "SELECT id FROM benutzer ORDER BY id DESC LIMIT 1";
 	private static final String SETSTELLID = "UPDATE benutzer SET stellid=? WHERE id=?";
-	private static final String DELETEU ="DELETE FROM benutzer WHERE = id=? "; 
+	private static final String DELETEU ="DELETE FROM benutzer WHERE id=? "; 
 	private static final String LOADBENUTZER = "SELECT * FROM benutzer WHERE id=?";
 	//Konstruktor, baut Connection zur MySQL-Datenbank auf
 	public BenutzerData(){
@@ -647,7 +647,7 @@ public Benutzer loadBenutzer(int user){
 		int stellid = data.getInt("stellid");
 
 		
-		Benutzer tmp = new Benutzer(id, name, pw, email , dozent, dekan, dez2,
+		Benutzer tmp = new Benutzer(id, name, email, pw , dozent, dekan, dez2,
 				  admin, stell, stellid);
 		return tmp;
 

@@ -4,6 +4,7 @@ import objects.Benutzer;
 
 import com.vaadin.terminal.ExternalResource;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Layout;
 import com.vaadin.ui.PasswordField;
@@ -21,7 +22,7 @@ public class ChangeBenutzerData extends Startseite implements Button.ClickListen
 	
 public ChangeBenutzerData(Benutzer tmp){
 	tmp1 = tmp; 
-	Window test = starta.getWindow("Aenderungsantraege");
+	Window test = starta.getWindow("AenderungBenutzer");
 	if(test != null){
 		starta.removeWindow(test);	
 	}
@@ -31,8 +32,8 @@ public ChangeBenutzerData(Benutzer tmp){
 	userName = new Label("Username");
 
 	
-	
-	newPass = new PasswordField("Passwort eingeben");
+	oldPass = new PasswordField("altes Passwort eingeben");
+	newPass = new PasswordField("neues Passwort eingeben");
 	newPass1 = new PasswordField("Passwort bestätigen");
 	uName = new TextField();
 	uName.setValue(tmp.getName());
@@ -46,8 +47,9 @@ public ChangeBenutzerData(Benutzer tmp){
 	change.setContent(reg);
 	change.addComponent(userName);
 	change.addComponent(uName);
-	change.addComponent(userMail);
 	change.addComponent(uMail);
+	
+	change.addComponent(oldPass);
 	change.addComponent(newPass);
 	change.addComponent(newPass1);
 	change.addComponent(save);
@@ -62,8 +64,8 @@ public ChangeBenutzerData(Benutzer tmp){
 	
 }
 
-public void buttonClick(Button.ClickEvent e){
-	if(e.equals("save")){
+public void buttonClick(ClickEvent event){
+	if(event.getButton() == save){
 		if(oldPass.getValue().equals(tmp1.getPw()) ){
 			if(newPass1.getValue().equals(newPass.getValue())){
 				String name =(String) uName.getValue();		

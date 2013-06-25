@@ -113,7 +113,7 @@ public class Startseite implements Button.ClickListener{
 	}
 
 	private AbsoluteLayout buildMainLayout() {
-		Button button_1,button_2,button_3,button_4,button_5,button_6,button_7,button_8,button_9,button_10,button_11;
+		Button button_1,button_2,button_3,button_4,button_5,button_6,button_7,button_8,button_9,button_10;
 		// common part: create layout
 		mainLayout = new AbsoluteLayout();
 		mainLayout.setImmediate(false);
@@ -221,14 +221,7 @@ public class Startseite implements Button.ClickListener{
 			mainLayout.addComponent(button_10, "top:75.0%;left:35.0%;");
 			
 		}
-		button_11 = getButton();  
-		if(button_11!=nullButton){
-			button_11.setWidth("-1px");
-			button_11.setHeight("-1px");
-			button_11.setStyleName(BaseTheme.BUTTON_LINK);
-			mainLayout.addComponent(button_11, "top:75.0%;left:35.0%;");
-			
-		}
+
 		return mainLayout;
 	}
 	
@@ -320,7 +313,12 @@ public class Startseite implements Button.ClickListener{
 		}
 		if(count==8){
 			count++;
+			if(changeBenutzer!=null) return changeBenutzer;
+		}
+		if (count==9){
+			count++;
 			if(logout!=null) return logout;
+			
 		}
 		return nullButton;
 	}
