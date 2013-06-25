@@ -73,7 +73,7 @@ public void buttonClick(Button.ClickEvent e){
 				Benutzer Neu = new Benutzer(tmp1.getId(), name, email, pw, tmp1.isDozent(),
 								tmp1.isDekan(), tmp1.isDez2(), tmp1.isAdmin(), tmp1.isStell()
 									, tmp1.getStellid());	
-				
+				cont.changeBenutzer(Neu);
 				
 				}
 				else{
