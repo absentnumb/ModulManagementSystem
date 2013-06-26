@@ -76,7 +76,7 @@ public class ModulReview extends Startseite implements Button.ClickListener{
 			}
 			System.out.println(modul);
 			contD.ändernModul(modul);
-			}	
+		}	
 	}
 	
 	//erstellt Listselect-Element mit Modulliste
@@ -123,7 +123,7 @@ public class ModulReview extends Startseite implements Button.ClickListener{
 		
 		// create
 		create = new Button();
-		create.setCaption("Modul ändern");
+		create.setCaption("Modul erstellen");
 		create.setImmediate(true);
 		create.setWidth("25.0%");
 		create.setHeight("-1px");
@@ -142,7 +142,7 @@ public class ModulReview extends Startseite implements Button.ClickListener{
 		
 		// aendern
 		aendern = new Button();
-		aendern.setCaption("Modul erstellen");
+		aendern.setCaption("Modul ändern");
 		aendern.setImmediate(false);
 		aendern.setWidth("25.0%");
 		aendern.setHeight("-1px");
