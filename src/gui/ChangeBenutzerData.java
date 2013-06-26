@@ -3,22 +3,19 @@ package gui;
 import objects.Benutzer;
 
 import com.vaadin.terminal.ExternalResource;
-import com.vaadin.ui.Button;
+import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.Layout;
-import com.vaadin.ui.PasswordField;
-import com.vaadin.ui.TextField;
-import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Window;
+import com.vaadin.ui.themes.BaseTheme;
+import com.vaadin.ui.themes.Runo;
 
 public class ChangeBenutzerData extends Startseite implements Button.ClickListener{
-	Window change, errW ;
-	Label userName, userMail;
+	Window change, errW;
+	Label label;
 	PasswordField oldPass, newPass, newPass1;
 	TextField uName, uMail;
 	Button save;
 	Benutzer tmp1;
+	private AbsoluteLayout mainLayout;
 	
 public ChangeBenutzerData(Benutzer tmp){
 	tmp1 = tmp; 
@@ -28,7 +25,7 @@ public ChangeBenutzerData(Benutzer tmp){
 	}
 
 	change = new Window("");
-	change.setName("AenderungBenutzer");
+	/*change.setName("AenderungBenutzer");
 	userName = new Label("Username");
 
 	
@@ -53,9 +50,12 @@ public ChangeBenutzerData(Benutzer tmp){
 	change.addComponent(newPass);
 	change.addComponent(newPass1);
 	change.addComponent(save);
-
+	*/
+	buildMainLayout();
+	change.setContent(mainLayout);
 	
-	save.addListener(this);	
+	save.addListener(this);
+	logout.addListener(this);
 	starta.addWindow(change);
 	
 	
@@ -90,8 +90,9 @@ public void buttonClick(ClickEvent event){
 			displayError("Altes Passwort stimmt nicht");	
 		}
 	}
-
-	
+	if(event.getButton()== logout){
+	       starta.getMainWindow().getApplication().close();			
+	}	
 }
 private void displayError(String text) {
 	
@@ -106,4 +107,88 @@ private void displayError(String text) {
 		errW.setHeight("200px");
 		errW.setWidth("200px");
 }
+
+private AbsoluteLayout buildMainLayout() {
+	// common part: create layout
+	mainLayout = new AbsoluteLayout();
+	mainLayout.setImmediate(false);
+	mainLayout.setWidth("100%");
+	mainLayout.setHeight("100%");
+	mainLayout.setMargin(false);
+	
+	// top-level component properties
+	mainLayout.setWidth("100.0%");
+	mainLayout.setHeight("100.0%");
+	
+	// label
+	label = new Label();
+	label.setImmediate(false);
+	label.setWidth("-1px");
+	label.setHeight("-1px");
+	label.setValue("Benutzerdaten ändern");
+	label.setStyleName(Runo.LABEL_H1);
+	mainLayout.addComponent(label, "top:25.0%;left:35.0%;");
+	
+	// save
+	save = new Button();
+	save.setCaption("speichern");
+	save.setImmediate(true);
+	save.setWidth("-1px");
+	save.setHeight("-1px");
+	mainLayout.addComponent(save, "top:75.0%;left:35.0%;");
+	
+	// logout
+	logout = new Button();
+	logout.setCaption("logout");
+	logout.setImmediate(true);
+	logout.setWidth("-1px");
+	logout.setHeight("-1px");
+	logout.setStyleName(BaseTheme.BUTTON_LINK);
+	mainLayout.addComponent(logout, "top:80.0%;left:35.0%;");
+	
+	// uName
+	uName = new TextField();
+	uName.setCaption("Benutzername");
+	uName.setValue(tmp1.getName());
+	uName.setImmediate(false);
+	uName.setWidth("25.0%");
+	uName.setHeight("-1px");
+	mainLayout.addComponent(uName, "top:35.0%;left:35.0%;");
+	
+	// uMail
+	uMail = new TextField();
+	uMail.setCaption("E-Mail");
+	uMail.setValue(tmp1.getEmail());
+	uMail.setImmediate(false);
+	uMail.setWidth("25.0%");
+	uMail.setHeight("-1px");
+	mainLayout.addComponent(uMail, "top:43.0%;left:35.0%;");
+	
+	// oldPass
+	oldPass = new PasswordField();
+	oldPass.setCaption("altes Passwort");
+	oldPass.setImmediate(false);
+	oldPass.setWidth("25.0%");
+	oldPass.setHeight("-1px");
+	mainLayout.addComponent(oldPass, "top:51.0%;left:35.0%;");
+	
+	// newPass
+	newPass = new PasswordField();
+	newPass.setCaption("neues Passwort");
+	newPass.setImmediate(false);
+	newPass.setWidth("25.0%");
+	newPass.setHeight("-1px");
+	mainLayout.addComponent(newPass, "top:59.0%;left:35.0%;");
+	
+	// newPass1
+	newPass1 = new PasswordField();
+	newPass1.setCaption("neues Passwort bestätigen");
+	newPass1.setImmediate(false);
+	newPass1.setWidth("-1px");
+	newPass1.setHeight("-1px");
+	mainLayout.addComponent(newPass1, "top:67.0%;left:35.0%;");
+	
+	return mainLayout;
+}
+
 }
