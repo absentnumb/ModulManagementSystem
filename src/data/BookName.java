@@ -14,6 +14,8 @@ public class BookName extends KillConnections {
 	
 	private static final String GETBOOKNAMES = "SELECT name FROM handbuchname";
 	private static final String GETBOOKIDS = "SELECT ID FROM handbuchname";
+	private static final String GETBOOKNAMESD = "SELECT name FROM handbuchname WHERE dekan=?";
+	private static final String GETBOOKIDSD = "SELECT ID FROM handbuchname WHERE dekan=?";
 	
 	public BookName(){
 		
@@ -31,7 +33,7 @@ public class BookName extends KillConnections {
 	}
 	
 	//holt sich Modulhandbuchnamen als Sting-Array aus der Datenbank
-	public String[] getBookNames(){
+	public String[] getBookNames(int user){
 		
 		LinkedList<String> tmp = new LinkedList<String>();
 		PreparedStatement psmt = null;
@@ -40,7 +42,13 @@ public class BookName extends KillConnections {
 		try {
 			con.setAutoCommit(false);
 
+			if(user ==0){
 			psmt = con.prepareStatement(GETBOOKNAMES);
+			}
+			else{
+			psmt = con.prepareStatement(GETBOOKNAMESD);
+			psmt.setInt(1,user);
+			}
 
 			data = psmt.executeQuery();
 
@@ -62,7 +70,7 @@ public class BookName extends KillConnections {
 	}
 	
 //holt sich Modulhanbuchids als LinkedList aus der Datenbank
-public LinkedList<Integer> getBookID(){
+public LinkedList<Integer> getBookID(int user){
 	
 		LinkedList<Integer> arr = new LinkedList<Integer>();
 		PreparedStatement psmt = null;
@@ -70,9 +78,13 @@ public LinkedList<Integer> getBookID(){
 
 		try {
 			con.setAutoCommit(false);
-
+			if(user ==0){
 			psmt = con.prepareStatement(GETBOOKIDS);
-
+			}
+			else{
+			psmt = con.prepareStatement(GETBOOKIDSD);
+			psmt.setInt(1,user);
+			}
 			data = psmt.executeQuery();
 			
 			while(data.next()){

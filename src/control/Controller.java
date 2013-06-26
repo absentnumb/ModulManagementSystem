@@ -142,8 +142,8 @@ public class Controller {
 	//ruft Datenbankzugriffe für Modulhandbuchnamen und -ids auf, übergibt Loginapplication
 	public void requestModule(LoginApplication start) {
 		
-		String[] list = book.getBookNames();
-		LinkedList<Integer>  ids = book.getBookID();
+		String[] list = book.getBookNames(0);
+		LinkedList<Integer>  ids = book.getBookID(0);
 		ModulhandbuchRequest req = new ModulhandbuchRequest(start, ids, list);
 	}
 

@@ -1,6 +1,9 @@
 package control;
 
 import gui.ChangeRequest;
+import gui.LoginApplication;
+import gui.ModulhandbuchRequest;
+import gui.ModulhandbuchRequestAen;
 import gui.RequestView;
 
 import java.util.LinkedList;
@@ -63,5 +66,12 @@ public class ControllerDekan extends Controller{
 	//speichert Datum und Handbuch-PDF
 	public void saveDatum(String datumstr){
 		
+	}
+	
+	public void requestModule() {
+		
+		String[] list = book.getBookNames(userid);
+		LinkedList<Integer>  ids = book.getBookID(userid);
+		ModulhandbuchRequestAen req = new ModulhandbuchRequestAen(ids, list);
 	}
 }
