@@ -2,6 +2,7 @@
 
 import objects.Benutzer;
 
+import com.vaadin.terminal.ClassResource;
 import com.vaadin.terminal.ExternalResource;
 import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
@@ -125,6 +126,7 @@ public class Startseite implements Button.ClickListener{
 		mainLayout.setWidth("100.0%");
 		mainLayout.setHeight("100.0%");
 		
+			
 		// welcome
 		welcome.setImmediate(false);
 		welcome.setWidth("-1px");
@@ -245,12 +247,7 @@ public class Startseite implements Button.ClickListener{
 		if(event.getButton() == messages){
 			//Dozent
 		}
-		
-		/*if(event.getButton() == stichtag){
-		
-			//Dekan
-		}*/
-		
+				
 		if(event.getButton() == viewChangeRequests){
 			//Dezernat 2
 		}
@@ -265,7 +262,7 @@ public class Startseite implements Button.ClickListener{
 		}
 		if(event.getButton()==stichtag){
 			DeadLine line = new DeadLine();
-			//Dozent
+			//Dekan
 		}
 		if(event.getButton()== logout){
 	       starta.getMainWindow().getApplication().close();

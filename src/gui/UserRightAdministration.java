@@ -56,7 +56,7 @@ public class UserRightAdministration extends Startseite implements Button.ClickL
 	
 
 
-	//öffnet Fenster in dem R�nge verteilt werden
+	//öffnet Fenster in dem Ränge verteilt werden
 	public void openRangWindow(String Rang){
 		
 		auswahlW = new Window("Rang auswählen");
@@ -75,7 +75,11 @@ public class UserRightAdministration extends Startseite implements Button.ClickL
 			//kein Rang verteilt
 		}
 		else{
-			if(Rang == "[Dozent, Dekan]"){
+			if(Rang.contains("Dozent")) group.select("Dozent");
+			if(Rang.contains("Dekan")) group.select("Dekan");
+			if(Rang.contains("Dezernat 2")) group.select("Dezernat 2");
+		}
+			/*if(Rang == "[Dozent, Dekan]"){
 				group.select("Dekan");
 				group.select("Dozent");
 			}
@@ -93,8 +97,8 @@ public class UserRightAdministration extends Startseite implements Button.ClickL
 								group.select(Rang);
 							}
 			}
-		}
-		}
+		}*/
+		
 		lay.addComponent(group);
 		speichern = new Button ("speichern");
 		speichern.addListener(this);	

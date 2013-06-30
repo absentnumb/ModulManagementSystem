@@ -53,6 +53,7 @@ public class Controller {
 		int Id;
 		Id = blarghs.getID(Name);
 		
+		if(blarghs.getRangDozent(Id) && blarghs.getRangDekan(Id) && blarghs.getRangDez2(Id)){rangname="[Dozent, Dekan, Dezernat 2]"; return rangname;}
 		if(blarghs.getRangDozent(Id) && blarghs.getRangDekan(Id)){rangname="[Dozent, Dekan]"; return rangname;}
 		if(blarghs.getRangDozent(Id) && blarghs.getRangDez2(Id)){rangname="[Dozent, Dezernat 2]"; return rangname;}
 		if(blarghs.getRangDekan(Id) && blarghs.getRangDez2(Id)){rangname="[Dekan, Dezernat 2]"; return rangname;}
@@ -98,13 +99,15 @@ public class Controller {
 		
 		int Id;
 		Id = blarghs.getID(Name);
-		
-		if (Rang.equals("[Dekan, Dozent]")||Rang.equals("[Dozent, Dekan]")){blarghs.setRangDozent(Id, true); blarghs.setRangDekan(Id, true); blarghs.setRangDez2(Id, false);}				//mehrere M�glichkeiten, da Reihenfolge im String nicht festgelegt
+		blarghs.setRangDozent(Id, Rang.contains("Dozent"));
+		blarghs.setRangDekan(Id, Rang.contains("Dekan"));		
+		blarghs.setRangDez2(Id, Rang.contains("Dezernat 2"));
+		/*if (Rang.equals("[Dekan, Dozent]")||Rang.equals("[Dozent, Dekan]")){blarghs.setRangDozent(Id, true); blarghs.setRangDekan(Id, true); blarghs.setRangDez2(Id, false);}				//mehrere M�glichkeiten, da Reihenfolge im String nicht festgelegt
 		if (Rang.equals("[Dozent, Dezernat 2]")||Rang.equals("[Dezernat 2, Dozent]")){blarghs.setRangDozent(Id, true); blarghs.setRangDez2(Id, true); blarghs.setRangDekan(Id, false);}
 		if (Rang.equals("[Dekan, Dezernat 2]")||Rang.equals("[Dezernat 2, Dekan]")){blarghs.setRangDekan(Id, true); blarghs.setRangDez2(Id, true); blarghs.setRangDozent(Id, false);}
 		if (Rang.equals("[Dozent]")){blarghs.setRangDozent(Id, true); blarghs.setRangDekan(Id, false); blarghs.setRangDez2(Id, false);}
 		if (Rang.equals("[Dekan]")){blarghs.setRangDekan(Id, true); blarghs.setRangDez2(Id, false); blarghs.setRangDozent(Id, false);}
-		if (Rang.equals("[Dezernat 2]")){blarghs.setRangDez2(Id, true); blarghs.setRangDozent(Id, false); blarghs.setRangDekan(Id, false);}
+		if (Rang.equals("[Dezernat 2]")){blarghs.setRangDez2(Id, true); blarghs.setRangDozent(Id, false); blarghs.setRangDekan(Id, false);}*/
 		
 	}
 	
