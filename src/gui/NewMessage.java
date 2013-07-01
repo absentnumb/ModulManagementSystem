@@ -62,7 +62,7 @@ public class NewMessage extends Startseite implements Button.ClickListener {
 	public void buttonClick(Button.ClickEvent event){
 		if(event.getButton() == anzeigen){
 			String tmp = nachricht.getValue().toString();
-			String[] splitResult = tmp.split(":", 1);
+			String[] splitResult = tmp.split(":");
 			int listnr = Integer.parseInt(splitResult[0])-1;
 			messageW = new Window(lis.get(listnr).getBetreff());
     		
@@ -71,6 +71,7 @@ public class NewMessage extends Startseite implements Button.ClickListener {
     		text = new Label(lis.get(listnr).getbeschreibung());
     		messageW.setContent(mess);
     		messageW.addComponent(text);
+    		okay = new Button("ok");
     		messageW.addComponent(okay);
     		newMess.addWindow(messageW);
     		okay.addListener(this);

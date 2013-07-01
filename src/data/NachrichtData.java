@@ -15,7 +15,7 @@ public class NachrichtData extends KillConnections {
 	private static final String LOADBENACHRICHTENLIST = "SELECT id FROM nachrichtendata WHERE modul!=0 && benutzer=?";
 	private static final String LOADNACHRICHT = "SELECT * FROM nachrichtendata WHERE id=?";
 	private static final String DELETE = "DELETE FROM nachrichtendata where id =?";
-	private static final String NEWNACRICHT = "Insert into nachrichtendata Values(?,?,?,?)";
+	private static final String NEWNACRICHT = "Insert into nachrichtendata Values(?,?,?,?,?)";
 	private static final String GETNEWID = "SELECT id FROM nachrichtendata ORDER BY id DESC LIMIT 1";
 	private static final String LOADNEWBENACHRICHTENLIST = "SELECT * FROM nachrichtendata WHERE modul=0 && benutzer=?";
 
@@ -179,7 +179,8 @@ public class NachrichtData extends KillConnections {
 			psmt.setInt(1, nachricht.getid());
 			psmt.setInt(2, nachricht.getbenutzer());
 			psmt.setString(3, nachricht.getbeschreibung());
-			psmt.setInt(4, nachricht.getmodule());
+			psmt.setString(4, nachricht.getBetreff());
+			psmt.setInt(5, nachricht.getmodule());
 
 
 			psmt.executeUpdate();
