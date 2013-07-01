@@ -29,9 +29,8 @@ public class DeadLine extends Startseite implements Button.ClickListener {
 	}
 public void buttonClick (Button.ClickEvent event) {
 		
-		
-		if(event.getButton() == ok){
-			
+	
+		if(event.getButton() == ok){	
 			try {
 				String datumstr = datum.getValue().toString();
 			}
