@@ -32,8 +32,8 @@ public class DeadLine extends Startseite implements Button.ClickListener {
 	}
 public void buttonClick (Button.ClickEvent event) {
 		
-		
-		if(event.getButton() == ok){
+	
+		if(event.getButton() == ok){	
 			try {
 				String datumstr = datum.getValue().toString();
 			}
@@ -45,7 +45,8 @@ public void buttonClick (Button.ClickEvent event) {
 				System.out.println("Datum eingeben");	//"Fehlermeldung" ;)
 			}
 			else{
-				contDek.saveDatum(datumstr);
+				//contDek.saveDatum(datumstr);
+				contDek.setDeadline(datumstr);
 			}
 		}
 		if(event.getButton() == okay){
@@ -117,6 +118,7 @@ private AbsoluteLayout buildMainLayout() {
 	ok.setImmediate(false);
 	ok.setWidth("-1px");
 	ok.setHeight("-1px");
+	ok.addListener(this);
 	lay.addComponent(ok, "top:50.0%;left:35.0%;");
 	
 	archive = new Button();
