@@ -15,7 +15,7 @@ import objects.Nachricht;
 public class ControllerDozent extends Controller{
 
 	//öffnet Datensatz zum Bearbeiten in neuem Fenster
-	public void ändernModul(int modul){
+	public void ändernModul(int modul, ModulReview tmp ){
 		if (modul == 0){
 		Modul neu = new Modul(modulDatabase.getNewId(),  null, 0, null,
 				 null, 0, null, userid , 
@@ -28,7 +28,7 @@ public class ControllerDozent extends Controller{
 			
 		 Modul test = modulDatabase.loadModule(modul);			
 		 if(modulDatabase.getSperr(test.getid())== true){
-			 System.out.println("Modul bereits geänder warten auf bestätigung");
+			 tmp.displayError("Modul bereits geänder warten auf bestätigung");
 			 /* NOCH FEHLT POP FENSTER*/
 			 
 		 } else {
