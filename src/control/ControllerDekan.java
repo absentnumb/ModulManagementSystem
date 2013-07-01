@@ -77,4 +77,16 @@ public class ControllerDekan extends Controller{
 		LinkedList<Integer>  ids = book.getBookID(userid);
 		ModulhandbuchRequestAen req = new ModulhandbuchRequestAen(ids, list);
 	}
+	
+	public void setDeadline(String Deadline) {
+		LinkedList<Integer> tmp = new LinkedList<Integer>(); 
+		tmp = deadlineData.newDeadlineMessage(userid);
+		for(int i = 0; i < tmp.size(); i++) {
+			int resid = tmp.get(i).intValue();
+			//System.out.println(resid);
+			Nachricht deadLine = new Nachricht(nachrichtenData.getNewId(),"Stichtag",Deadline,resid, 0);
+			nachrichtenData.newNachricht(deadLine);
+		}
+		
+	}
 }

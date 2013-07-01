@@ -42,7 +42,8 @@ public void buttonClick (Button.ClickEvent event) {
 				System.out.println("Datum eingeben");	//"Fehlermeldung" ;)
 			}
 			else{
-				contDek.saveDatum(datumstr);
+				//contDek.saveDatum(datumstr);
+				contDek.setDeadline(datumstr);
 			}
 		}
 		if(event.getButton()== logout){
@@ -85,6 +86,7 @@ private AbsoluteLayout buildMainLayout() {
 	ok.setImmediate(false);
 	ok.setWidth("-1px");
 	ok.setHeight("-1px");
+	ok.addListener(this);
 	lay.addComponent(ok, "top:50.0%;left:35.0%;");
 	
 	// logout
