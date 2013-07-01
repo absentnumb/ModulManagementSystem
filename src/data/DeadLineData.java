@@ -46,7 +46,6 @@ public class DeadLineData extends KillConnections{
 			
 			data = psmt.executeQuery();
 			
-			
 
 			while(data.next()){
 				

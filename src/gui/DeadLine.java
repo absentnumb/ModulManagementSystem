@@ -34,7 +34,6 @@ public void buttonClick (Button.ClickEvent event) {
 			try {
 				String datumstr = datum.getValue().toString();
 			}
-			
 			catch (NullPointerException e){
 				datumstr = "";
 			}
