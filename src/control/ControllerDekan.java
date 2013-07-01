@@ -25,7 +25,10 @@ public class ControllerDekan extends Controller{
 		
 		if (ok){			
 			modulPufferData.deleteBufferModule(modul.getid());	
-			modulDatabase.deleteModule(modul.getid());
+			//Das Modul ist bereits vorhanden, wenn der Löschvorgang erfolgreich ist
+			if (modulDatabase.deleteModule(modul.getid()) == 0) {
+				modulDatabase.moveModuleIntoDefaultFach(modul.getid());
+			}
 			modulDatabase.saveModule(modul);		
 			modulDatabase.setSperr(modul.getid(), false);
 			Nachricht nachricht = new Nachricht(nachrichtenData.getNewId(), "Ihre Anfrage bezüglich des Moduls " +modul.gettitle()+" wurde angenommen.","Anfrage akzeptiert",modul.getdozid(), 0);

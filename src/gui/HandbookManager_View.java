@@ -13,10 +13,12 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.Tree;
+import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.Window.Notification;
 
 import control.ModuleTable;
+import control.UnassignedModulesTable;
 import control.ModuleTree;
 
 import data.BookData;
@@ -37,9 +39,17 @@ public class HandbookManager_View extends Startseite {
 	public ModuleTree mt;
 	public Label choice;
 	
+	public Panel tablePanel1;
+	public Panel tablePanel11;
+	public Panel tablePanel12;
+	
+	public UnassignedModulesTable umta;
+	public Table unassignedModules;
+	public Button add1;
+	
 	public ModuleTable mta;
 	public Table modules;
-	public Button add;
+	public Button add2;
 	
 	
 	public HandbookManager_View (int id) {
@@ -72,13 +82,38 @@ public class HandbookManager_View extends Startseite {
 		
 		w.addComponent(new Label("-"));
 		
+		
+		tablePanel1 = new Panel();
+		tablePanel1.setContent(new HorizontalLayout());
+		
+		tablePanel11 = new Panel();
+		tablePanel11.setContent(new VerticalLayout());
+		
+		umta = new UnassignedModulesTable();
+		unassignedModules = umta.generateTable();
+		tablePanel11.addComponent(unassignedModules);
+		
+		add1 = new Button("Modul dem ausgewählten Fach hinzufügen");
+		add1.setEnabled(false);
+		tablePanel11.addComponent(add1);
+		
+		tablePanel1.addComponent(tablePanel11);
+		
+
+		tablePanel12 = new Panel();
+		tablePanel12.setContent(new VerticalLayout());
+		
 		mta = new ModuleTable();
 		modules = mta.generateTable();
-		w.addComponent(modules);
+		tablePanel12.addComponent(modules);
 		
-		add = new Button("Modul dem ausgewählten Fach hinzufügen");
-		add.setEnabled(false);
-		w.addComponent(add);
+		add2 = new Button("Modul dem ausgewählten Fach hinzufügen");
+		add2.setEnabled(false);
+		tablePanel12.addComponent(add2);
+		
+		tablePanel1.addComponent(tablePanel12);
+		
+		w.addComponent(tablePanel1);
 		
 				
 		Window old = starta.getWindow("Startseite");

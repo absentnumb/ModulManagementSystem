@@ -11,6 +11,10 @@ import java.io.InputStreamReader;
 import com.vaadin.terminal.FileResource;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -62,10 +66,27 @@ public class ModuleHandbook{
 	 */
 	public FileResource generatePDF(int rootID, LoginApplication la) {
 		String modulhandbuchname = modulDatabase.getFachname(rootID);
+		
+		//Es wird der String semester erzeugt, der das aktuelle Semester
+		//(SS oder WS) und Jahr (zweistellig) angibt
+		String semester = "";
+		DateFormat df = new SimpleDateFormat("MM");
+		Calendar x = Calendar.getInstance();
+		int month = Integer.parseInt(df.format(x.getTime()));
+		if (month > 3 && month < 11) {
+			semester = "SS";
+		} else {
+			semester = "WS";
+		}
+		df = new SimpleDateFormat("yyyy");
+		x = Calendar.getInstance();
+		int year = Integer.parseInt(df.format(x.getTime()));
+		semester = semester + year;
+		
 		//s = S;
 		s = "\\documentclass{article}" + lineSeparator +
 				"\\begin{document} " + lineSeparator +
-				"\\title{Modulhandbuch "+modulhandbuchname+"}" + lineSeparator +
+				"\\title{Modulhandbuch "+modulhandbuchname+" "+semester+"}" + lineSeparator +
 				"\\author{Module Management System, University of Ulm}" + lineSeparator +
 				"\\maketitle" + lineSeparator +
 				"\\begin{abstract}" + lineSeparator +
@@ -95,7 +116,7 @@ public class ModuleHandbook{
 			path = la.start.getContext().getBaseDirectory().getAbsolutePath();
 			System.out.println(path);
 			//PrintWriter pw = new PrintWriter(path + "\\Modulhandbuch"+dataID+".tex");
-			PrintWriter pw = new PrintWriter(path + "/Modulhandbuch"+modulhandbuchname+".tex");
+			PrintWriter pw = new PrintWriter(path + "/Modulhandbuch"+modulhandbuchname+semester+".tex");
 			//PrintWriter pw = new PrintWriter("Modulhandbuch.tex");
 			pw.println(s);
 			pw.close();
@@ -105,21 +126,21 @@ public class ModuleHandbook{
 		//Verwende MiKTeX zu PDF-Generierung
 		//run("cmd /c pdflatex.exe  " + path + "\\Modulhandbuch"+dataID+".tex");
 	
-		run("pdflatex Modulhandbuch"+modulhandbuchname+".tex" +
+		run("pdflatex Modulhandbuch"+modulhandbuchname+semester+".tex" +
 				" -output-directory=/", path);
 		//run("cmd /c Modulhandbuch"+dataID+".pdf");
 		//FileResource fr = new FileResource(new File( path + "Modulhandbuch"+dataID+".pdf"), null);
 		
-		File f1 = new File(path + "/Modulhandbuch"+modulhandbuchname+".pdf");
+		File f1 = new File(path + "/Modulhandbuch"+modulhandbuchname+semester+".pdf");
 		//Schreibe die Pfade der temporär erzeugten Dateien in eine Textdatei
 		//um diese anhand dieser wieder mit "deleteTempFiles" löschen zu können
 		File f2 = new File(path + "/tempFiles.txt");
 		try {
 			FileWriter pw  = new FileWriter(path + "/tempFiles.txt", true);
-			pw.write(path + "/Modulhandbuch"+modulhandbuchname+".pdf" + lineSeparator);
-			pw.write(path + "/Modulhandbuch"+modulhandbuchname+".tex" + lineSeparator);
-			pw.write(path + "/Modulhandbuch"+modulhandbuchname+".aux" + lineSeparator);
-			pw.write(path + "/Modulhandbuch"+modulhandbuchname+".log" + lineSeparator);
+			pw.write(path + "/Modulhandbuch"+modulhandbuchname+semester+".pdf" + lineSeparator);
+			pw.write(path + "/Modulhandbuch"+modulhandbuchname+semester+".tex" + lineSeparator);
+			pw.write(path + "/Modulhandbuch"+modulhandbuchname+semester+".aux" + lineSeparator);
+			pw.write(path + "/Modulhandbuch"+modulhandbuchname+semester+".log" + lineSeparator);
 			pw.close();	
 		} catch (IOException e) {
 			e.printStackTrace();			
@@ -198,7 +219,7 @@ public class ModuleHandbook{
 	}
 	
 	//Führt einen Befehl über die command-line aus 
-	private void run(String command,String path) {
+	private void run(String command, String path) {
 		try {
 			Runtime rt = Runtime.getRuntime();
 			Process p = rt.exec(command,null, new File(path));
