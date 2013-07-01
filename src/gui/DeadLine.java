@@ -7,11 +7,14 @@ import com.vaadin.ui.themes.Runo;
 
 public class DeadLine extends Startseite implements Button.ClickListener {
 
-	Window dead;
+	String out, out2, time;
+	OptionGroup group;
+	TextField year;
+	Window dead, archiveW;
 	String datumstr;
 	Label label;
 	TextField datum;  
-	private Button ok;
+	private Button ok, archive, okay;
 	private AbsoluteLayout lay;
 	public DeadLine(){
 		Window test = starta.getWindow("Stellvertreter");
@@ -29,8 +32,8 @@ public class DeadLine extends Startseite implements Button.ClickListener {
 	}
 public void buttonClick (Button.ClickEvent event) {
 		
-		
-		if(event.getButton() == ok){
+	
+		if(event.getButton() == ok){	
 			try {
 				String datumstr = datum.getValue().toString();
 			}
@@ -42,14 +45,44 @@ public void buttonClick (Button.ClickEvent event) {
 				System.out.println("Datum eingeben");	//"Fehlermeldung" ;)
 			}
 			else{
-				contDek.saveDatum(datumstr);
+				//contDek.saveDatum(datumstr);
+				contDek.setDeadline(datumstr);
 			}
+		}
+		if(event.getButton() == okay){
+			out = group.getValue().toString();
+			out2 = (String)year.getValue();
+			time = out + " " + out2;
+			contDek.scanHandbooks(userid, time);
+		}
+		if(event.getButton() == archive){
+			archiveDate();
 		}
 		if(event.getButton()== logout){
 		       starta.getMainWindow().getApplication().close();
 				
 		}
 	}
+
+public void archiveDate(){
+	year = new TextField("Jahr");
+	group = new OptionGroup();
+	group.setMultiSelect(false);
+	group.addItem("Wintersemester");
+	group.addItem("Sommersemester");
+	archiveW = new Window("Daten eingeben");
+	okay = new Button("ok");
+	okay.addListener(this);
+	Layout re = new VerticalLayout();
+	
+	archiveW.setContent(re);
+	archiveW.addComponent(group);
+	archiveW.addComponent(year);
+	archiveW.addComponent(okay);
+	dead.addWindow(archiveW);
+	archiveW.setHeight("300px");
+	archiveW.setWidth("300px");
+}
 
 private AbsoluteLayout buildMainLayout() {
 	lay = new AbsoluteLayout();
@@ -85,7 +118,16 @@ private AbsoluteLayout buildMainLayout() {
 	ok.setImmediate(false);
 	ok.setWidth("-1px");
 	ok.setHeight("-1px");
+	ok.addListener(this);
 	lay.addComponent(ok, "top:50.0%;left:35.0%;");
+	
+	archive = new Button();
+	archive.setCaption("Archivieren");
+	archive.setImmediate(false);
+	archive.setWidth("-1px");
+	archive.setHeight("-1px");
+	lay.addComponent(archive, "top:50.0%;left:30.0%");
+	
 	
 	// logout
 	logout = new Button();

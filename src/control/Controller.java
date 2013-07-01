@@ -1,3 +1,4 @@
+
 package control;
 
 import java.util.LinkedList;
@@ -18,6 +19,7 @@ import data.BookName;
 import data.ModulDatabase;
 import data.ModulPufferData;
 import data.NachrichtData;
+import data.DeadLineData;
 
 
 
@@ -27,6 +29,7 @@ public class Controller {
 	protected ModulDatabase modulDatabase = new ModulDatabase();
 	protected ModulPufferData modulPufferData = new ModulPufferData();
 	protected NachrichtData nachrichtenData = new NachrichtData();
+	protected DeadLineData deadlineData = new DeadLineData();
 	protected BookName book = new BookName();
 	protected BookData bookdata = new BookData();
 	protected static int userid ;
