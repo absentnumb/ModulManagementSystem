@@ -118,6 +118,7 @@ public class Controller {
 	//gibt Username und Passwort an Benutzer-Klasse weiter zur Verifizierung, wenn verifiziert werden angegebene Aktionen ausgeführt
 	public void login(String us, String pw, LoginApplication b) {
 		
+		
 	if( blarghs.loginCheck(us,pw) == true){
 		
 		//UserRightAdministration test = new UserRightAdministration(b);
