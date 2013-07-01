@@ -31,6 +31,7 @@ public void buttonClick (Button.ClickEvent event) {
 		
 		
 		if(event.getButton() == ok){
+			
 			try {
 				String datumstr = datum.getValue().toString();
 			}
