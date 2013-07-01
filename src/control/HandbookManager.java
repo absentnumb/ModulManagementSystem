@@ -24,6 +24,7 @@ public class HandbookManager implements ClickListener, ItemClickListener{
 	ModulDatabase data;
 	int id;
 	int selectedId;
+	String selectedUnassignedModule;
 	String selectedModule;
 	
 	//Der Konstruktor erwartet die ID des Modulhandbuches, dass angezeigt
@@ -39,8 +40,10 @@ public class HandbookManager implements ClickListener, ItemClickListener{
 		gui.addFach.addListener(this);
 		gui.delete.addListener(this);
 		gui.moduletree.addListener(this);
+		gui.unassignedModules.addListener(this);
 		gui.modules.addListener(this);
-		gui.add.addListener(this);
+		gui.add1.addListener(this);
+		gui.add2.addListener(this);
 		
 	}
 	
@@ -55,15 +58,21 @@ public class HandbookManager implements ClickListener, ItemClickListener{
 			data.newFach(selectedId, s);
 						
 		}
-		if (e.getSource() == gui.add) {
+		if (e.getSource() == gui.add1) {
 			
-			String s = selectedModule;			
+			String s = selectedUnassignedModule;			
 			String[] splittedString = s.split(" ");
 			int fid = Integer.parseInt(splittedString[0]);
 			System.out.println("Modul zugeordnet: " + data.moveNewModule(selectedId, fid));
 			
 			
-		} 
+		}
+		if (e.getSource() == gui.add2) {
+			String s = selectedModule;
+			String[] splittedString = s.split(" ");
+			int fid = Integer.parseInt(splittedString[0]);
+			System.out.println("Modul (nochmals) zugeordnet: " + data.moveModule(selectedId, fid));
+		}
 		if (e.getSource() == gui.delete) {
 			//Löschen eines Faches
 			System.out.println("Löschvorgang durchgeführt: " + data.deleteFachOrModul(selectedId));
@@ -98,29 +107,42 @@ public class HandbookManager implements ClickListener, ItemClickListener{
 				gui.addFach.setEnabled(true);
 				gui.fachname.setEnabled(true);
 				//Prüfe auch ob ein nicht zugeordnetes Modul markiert ist			
+				if (gui.unassignedModules.getValue() != null) {
+					gui.add1.setEnabled(true);
+				}
 				if (gui.modules.getValue() != null) {
-					gui.add.setEnabled(true);
-				}				
+					gui.add2.setEnabled(true);
+				}
 			} else {
 				System.out.println("Dies ist ein Modul.");
 				selectedId = Integer.parseInt(splittedString[0]);
 				gui.addFach.setEnabled(false);
 				gui.fachname.setEnabled(false);
 				
-				gui.add.setEnabled(false);
+				gui.add1.setEnabled(false);
+				gui.add2.setEnabled(false);
+				
 				
 			}
 			gui.choice.setValue("Ausgewähltes Element: Fach " + splittedString[2]);
 			
 			//Table
+		} else if (e.getSource() == gui.unassignedModules) {
+			selectedUnassignedModule = e.getItem().toString();
+			System.out.println(selectedUnassignedModule);
+			//if (gui.fachname2.isEnabled() == true && gui.modules.getValue() != null) {}
+			if (gui.fachname.isEnabled() == true) {
+				gui.add1.setEnabled(true);
+			} else {
+				gui.add1.setEnabled(false);
+			}
 		} else if (e.getSource() == gui.modules) {
 			selectedModule = e.getItem().toString();
 			System.out.println(selectedModule);
-			//if (gui.fachname2.isEnabled() == true && gui.modules.getValue() != null) {}
 			if (gui.fachname.isEnabled() == true) {
-				gui.add.setEnabled(true);
+				gui.add2.setEnabled(true);
 			} else {
-				gui.add.setEnabled(false);
+				gui.add2.setEnabled(false);
 			}
 		}
 		

@@ -243,7 +243,10 @@ public class ModulDatabase extends KillConnections {
 	}
 	
 	//löscht Modul aus der Datenbank
-	public void deleteModule (int moduleid) {
+	public int deleteModule (int moduleid) {
+		
+		//Die Anzahl der Einträge die gelöscht wurden wird ausgegeben
+		int deletings = 0;
 		
 		PreparedStatement psmt = null;
 		ResultSet data = null;
@@ -253,8 +256,10 @@ public class ModulDatabase extends KillConnections {
 
 			psmt = con.prepareStatement(DELETEMODULE);
 			psmt.setInt(1, moduleid);
-
-			psmt.executeUpdate();
+			
+			deletings = psmt.executeUpdate();
+			
+			System.out.println("DELETE?:"+deletings);
 			con.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -263,7 +268,7 @@ public class ModulDatabase extends KillConnections {
 		} finally {
 			closeConnections(data, psmt);
 		}
-		
+		return deletings;
 	}
 	
 	//überprüft, ob Moduldatensatz gesperrt ist oder nicht
@@ -340,10 +345,11 @@ public class ModulDatabase extends KillConnections {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			closeConnections(data, psmt);
 			return fachname;
 		}
 		
-		//Gebe dem Modulnamen zu einer ID zurück
+		//Gebe den Modulnamen zu einer ID zurück
 		//TODO Test
 		public String getModulname(int id) {
 			String modulname = null;
@@ -363,6 +369,7 @@ public class ModulDatabase extends KillConnections {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			closeConnections(data, psmt);
 			return modulname;
 		}
 		//===================================================================================
@@ -392,6 +399,7 @@ public class ModulDatabase extends KillConnections {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			closeConnections(data, psmt);
 			return list;
 		}
 		
@@ -465,6 +473,7 @@ public class ModulDatabase extends KillConnections {
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
+					closeConnections(data, psmt);
 				}
 				
 				//Lösche das angegebene Fach
@@ -527,6 +536,7 @@ public class ModulDatabase extends KillConnections {
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
+					closeConnections(data, psmt);
 					return b;
 				}
 				
@@ -550,9 +560,13 @@ public class ModulDatabase extends KillConnections {
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
+					closeConnections(data, psmt);
 					return list;
 				}
 				
+				/*Ordne ein noch nicht zugeordnetes Modul (aus Fach 0) einem anderen Fach zu.
+				 * Der Zeiger von Fach 0 au das Modul wird dabei gelöscht.
+				 */
 				public boolean moveNewModule(int id, int fid) {
 					boolean b = false;
 					
@@ -573,13 +587,50 @@ public class ModulDatabase extends KillConnections {
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
+					closeConnections(data, psmt);
+					return b;
+				}
+				
+				/*Ordne ein Modul einem Fach zu. Diese Methode ist für Module gedacht, die bereits einmal zugeordnet wurden.
+				 */
+				public boolean moveModule(int id, int fid) {
+					boolean b = false;
 					
+					PreparedStatement psmt = null;
+					ResultSet data = null;
 					
+					try {	
+						
+							psmt = con.prepareStatement("INSERT INTO handbuchdata VALUES("+id+", "+fid+")");
+							psmt.executeUpdate();
+							
+							b = true;
+							
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					closeConnections(data, psmt);
+					return b;
+				}
+				
+				//Erzeugt einen Zeiger von Fach 0 auf ein Modul
+				public boolean moveModuleIntoDefaultFach(int fid) {
+					boolean b = false;
 					
+					PreparedStatement psmt = null;
+					ResultSet data = null;
 					
-					
-					
-					
+					try {	
+							// Das Fach mit der ID 0 zeigt auf das angegebene Modul
+							psmt = con.prepareStatement("INSERT INTO handbuchdata VALUES("+0+", "+fid+")");
+							psmt.executeUpdate();
+														
+							b = true;
+							
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					closeConnections(data, psmt);
 					return b;
 				}
 
