@@ -23,9 +23,10 @@ public class Startseite implements Button.ClickListener{
 	private int count;//Zähler für Buttons
 	//Benutzer user;
 	public static LoginApplication starta;
+	protected static Startseite seite;
 	
 	int userid, rang;
-	Controller cont = new Controller();
+	Controller cont = new Controller(starta);
 	ControllerDozent contD = new ControllerDozent();
 	ControllerDekan contDek = new ControllerDekan();
 	
@@ -33,8 +34,10 @@ public class Startseite implements Button.ClickListener{
 	public Startseite(){
 	}
 	
-	public Startseite (LoginApplication aa, String name){
+	public Startseite (LoginApplication aa, int id, Window old){
 		starta = aa;
+		seite = this;
+		String name = cont.loadBenutzer(id).getName(); 
 		Window test = starta.getWindow("Startseite");
 		if(test != null){
 			starta.removeWindow(test);	
@@ -46,7 +49,7 @@ public class Startseite implements Button.ClickListener{
 		starta.addWindow(start);		
 		
 		//user = new Benutzer();
-		userid = cont.getID(name);
+		userid = id;
 		
 		count = 0;
 		nullButton = new Button();
@@ -107,7 +110,7 @@ public class Startseite implements Button.ClickListener{
 		start.setContent(mainLayout);
 		//start.addComponent(logout);
 		
-		Window old = starta.getWindow("main");
+		//Window old = starta.getWindow("main");
 		old.open(new ExternalResource(start.getURL()));
 		//starta.removeWindow(old);	
 
@@ -319,4 +322,5 @@ public class Startseite implements Button.ClickListener{
 		}
 		return nullButton;
 	}
+
 }

@@ -16,7 +16,7 @@ public class LoginApplication extends Application implements Button.ClickListene
 	
 	private Button login, okay, save, modul, register;
 	Window mainWindow, modulW, errW, selErrW ,adminWindow, regW, regErrW;
-	Controller control = new Controller();
+	Controller control = new Controller(this);
 	private VerticalLayout vertical;
 	private AbsoluteLayout mainLayout;
 	Label user, wrong, wrong2, userName, userMail, regErr;
