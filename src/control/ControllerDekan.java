@@ -16,6 +16,9 @@ import data.*;
 
 public class ControllerDekan extends Controller{
 	
+	BookName bookName = new BookName();
+	SaveHandbook save = new SaveHandbook();
+	
 	public ControllerDekan(){	  
 	}
 	
@@ -73,5 +76,10 @@ public class ControllerDekan extends Controller{
 		String[] list = book.getBookNames(userid);
 		LinkedList<Integer>  ids = book.getBookID(userid);
 		ModulhandbuchRequestAen req = new ModulhandbuchRequestAen(ids, list);
+	}
+
+	public void scanHandbooks(int userid, String time) {
+		LinkedList<Integer> arr = bookName.getBookID(userid);
+		save.archive(arr, time);
 	}
 }
