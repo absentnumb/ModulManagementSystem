@@ -125,6 +125,7 @@ public class SetDeputy extends Startseite implements Button.ClickListener {
 		ok.setImmediate(false);
 		ok.setWidth("-1px");
 		ok.setHeight("-1px");
+		ok.addListener(this);
 		mainLayout.addComponent(ok, "top:83.0%;left:35.0%;");
 		
 		// logout
