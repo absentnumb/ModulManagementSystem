@@ -245,7 +245,7 @@ public class Startseite implements Button.ClickListener{
 		}
 		
 		if(event.getButton() == messages){
-			//Dozent
+			cont.loadNewMessageList();//Dozent
 		}
 				
 		if(event.getButton() == viewChangeRequests){

@@ -17,6 +17,7 @@ public class NachrichtData extends KillConnections {
 	private static final String DELETE = "DELETE FROM nachrichtendata where id =?";
 	private static final String NEWNACRICHT = "Insert into nachrichtendata Values(?,?,?,?)";
 	private static final String GETNEWID = "SELECT id FROM nachrichtendata ORDER BY id DESC LIMIT 1";
+	private static final String LOADNEWBENACHRICHTENLIST = "SELECT * FROM nachrichtendata WHERE modul=0 && benutzer=?";
 
 	public NachrichtData(){
 		
@@ -51,9 +52,10 @@ public class NachrichtData extends KillConnections {
 			int id = data.getInt("id");
 			int benutzer = data.getInt("benutzer");
 			String beschreibung = data.getString("beschreibung");
+			String betreff = data.getString("betreff");
 			int modul = data.getInt("modul");
 			
-			Nachricht tmp = new Nachricht(id, beschreibung, benutzer, modul);
+			Nachricht tmp = new Nachricht(id, beschreibung, betreff, benutzer, modul);
 			return tmp;
 
 		} catch (SQLException e) {
@@ -79,6 +81,41 @@ public class NachrichtData extends KillConnections {
 			con.setAutoCommit(false);
 
 			psmt = con.prepareStatement(LOADBENACHRICHTENLIST);
+			psmt.setInt(1, userid);
+		
+			data = psmt.executeQuery();
+
+			while(data.next()){
+			
+			
+
+				int tmp1 = data.getInt("id");
+			
+				tmp.add(loadNachricht(tmp1));
+			}
+			return tmp;
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			closeConnections(data, psmt);
+		}
+	}
+	
+	public LinkedList<Nachricht> loadNewBenachrichtList (int userid){
+		
+		PreparedStatement psmt = null;
+		ResultSet data = null;
+
+		try {
+			LinkedList<Nachricht> tmp = new LinkedList<Nachricht>();
+			con.setAutoCommit(false);
+
+			psmt = con.prepareStatement(LOADNEWBENACHRICHTENLIST);
 			psmt.setInt(1, userid);
 		
 			data = psmt.executeQuery();

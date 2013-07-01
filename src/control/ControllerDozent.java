@@ -57,7 +57,7 @@ public class ControllerDozent extends Controller{
 		modulPufferData.writeBufferModule(modul);
 	    modulDatabase.setSperr(modul.getid(), true);
 
-		Nachricht test = new Nachricht(nachrichtenData.getNewId(),"", modul.getresponsibleid(), modul.getid());
+		Nachricht test = new Nachricht(nachrichtenData.getNewId(),"", "",modul.getresponsibleid(), modul.getid());
 		nachrichtenData.newNachricht(test);
 		//nachrichtenData.newBenachrichtigung(modul);
 	}

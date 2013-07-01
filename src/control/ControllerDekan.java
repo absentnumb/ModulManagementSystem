@@ -28,13 +28,13 @@ public class ControllerDekan extends Controller{
 			modulDatabase.deleteModule(modul.getid());
 			modulDatabase.saveModule(modul);		
 			modulDatabase.setSperr(modul.getid(), false);
-			Nachricht nachricht = new Nachricht(nachrichtenData.getNewId(), "Ihre Anfrage bezüglich des Moduls " +modul.gettitle()+" wurde angenommen.",modul.getdozid(), 0);
+			Nachricht nachricht = new Nachricht(nachrichtenData.getNewId(), "Ihre Anfrage bezüglich des Moduls " +modul.gettitle()+" wurde angenommen.","Anfrage akzeptiert",modul.getdozid(), 0);
 			nachrichtenData.newNachricht(nachricht);
 			
 		}
 		else{	
 			modulDatabase.setSperr(modul.getid(), false);
-			Nachricht nachricht = new Nachricht(nachrichtenData.getNewId(), "Ihre Anfrage bezüglich des Moduls " +modul.gettitle()+" wurde abgelehnt.",modul.getdozid(), 0);
+			Nachricht nachricht = new Nachricht(nachrichtenData.getNewId(), "Ihre Anfrage bezüglich des Moduls " +modul.gettitle()+" wurde abgelehnt.","Anfrage abgelehnt",modul.getdozid(), 0);
 			nachrichtenData.newNachricht(nachricht);
 			modulPufferData.deleteBufferModule(modul.getid());
 		}

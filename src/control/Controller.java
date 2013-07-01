@@ -3,9 +3,11 @@ package control;
 import java.util.LinkedList;
 
 import objects.Benutzer;
+import objects.Nachricht;
 
 import gui.LoginApplication;
 import gui.ModulhandbuchRequest;
+import gui.NewMessage;
 import gui.Startseite;
 
 import data.BenutzerData;
@@ -168,5 +170,11 @@ public class Controller {
 	public Benutzer loadBenutzer(int userid1){
 		Benutzer tmp = blarghs.loadBenutzer(userid1);
 		return tmp;
+	}
+	
+	public void loadNewMessageList(){
+
+		LinkedList<Nachricht> list = nachrichtenData.loadNewBenachrichtList(userid);
+		NewMessage newMessages = new NewMessage(list);
 	}
 }
