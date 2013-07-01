@@ -41,9 +41,13 @@ public class ControllerDozent extends Controller{
 	
 	//gibt Änderungsantrag aus
 	public void ausgebenModulList(int userid){
-		LinkedList<ModulKu> idiot = modulDatabase.loadModuleList(userid);
-	
-		ModulReview a = new ModulReview(idiot);
+		LinkedList<ModulKu> list = modulDatabase.loadModuleList(userid);
+		if (blarghs.getRangStell(userid)){
+			LinkedList<ModulKu> stellList = modulDatabase.loadModuleList(blarghs.getStellID(userid));
+			for(int i=0;i<stellList.size();i++)list.add(stellList.get(i));
+		}	
+		
+		ModulReview a = new ModulReview(list);
 		
 	}
 	
