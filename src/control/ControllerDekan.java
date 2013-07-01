@@ -95,7 +95,5 @@ public class ControllerDekan extends Controller{
 			Nachricht deadLine = new Nachricht(nachrichtenData.getNewId(),"Stichtag",Deadline,resid, 0);
 			nachrichtenData.newNachricht(deadLine);
 		}
-		
-
 	}
 }
