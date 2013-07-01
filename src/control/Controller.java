@@ -1,6 +1,5 @@
 
 package control;
-
 import java.util.LinkedList;
 
 import com.vaadin.ui.Window;
