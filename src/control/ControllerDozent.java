@@ -2,9 +2,12 @@
 
 import gui.ModulEditCreate;
 import gui.ModulReview;
+import gui.Startseite;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import com.vaadin.ui.Window;
 
 import objects.Modul;
 import objects.ModulKu;
@@ -64,5 +67,8 @@ public class ControllerDozent extends Controller{
 		Nachricht test = new Nachricht(nachrichtenData.getNewId(),"", "",modul.getresponsibleid(), modul.getid());
 		nachrichtenData.newNachricht(test);
 		//nachrichtenData.newBenachrichtigung(modul);
+		
+		Window old = login.getWindow("Modulaendern");
+		Startseite tmp = new Startseite(login, userid,old);
 	}
 }

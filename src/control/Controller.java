@@ -2,6 +2,8 @@ package control;
 
 import java.util.LinkedList;
 
+import com.vaadin.ui.Window;
+
 import objects.Benutzer;
 import objects.Nachricht;
 
@@ -28,14 +30,16 @@ public class Controller {
 	protected BookName book = new BookName();
 	protected BookData bookdata = new BookData();
 	protected static int userid ;
-
+	protected static LoginApplication login;
 	
-	BenutzerData blarghs;
-	
+	BenutzerData blarghs = new BenutzerData();
 	//Konstruktor
-	public Controller(){
-	
-		blarghs = new BenutzerData();
+	public Controller (){
+		
+		
+	}
+	public Controller(LoginApplication tmp){
+	login = tmp;
 	}
 	
 	//Zugriff auf Datenbank-Klasse, holt sich Benutzerliste
@@ -119,10 +123,11 @@ public class Controller {
 	if( blarghs.loginCheck(us,pw) == true){
 		
 		//UserRightAdministration test = new UserRightAdministration(b);
-	
-		Startseite aa = new Startseite(b, us);
-		
 		userid = blarghs.getID(us);
+		Window old = login.getWindow("main");
+		Startseite aa = new Startseite(b, userid, old);
+		
+		
 
 	}else {
 		b.displayError();
