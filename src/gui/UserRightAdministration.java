@@ -125,8 +125,7 @@ public class UserRightAdministration extends Startseite implements Button.ClickL
 			}
 	
 			if(aus == ""){
-				selectError();
-				//System.out.println("Du bist zu blöd etwas auszuwählen !!!");	//"Fehlermeldung" ;)
+				selectError(); //"Fehlermeldung" ;)
 			}
 			else{
 				String blub = cont.rangAusgeben(aus);			

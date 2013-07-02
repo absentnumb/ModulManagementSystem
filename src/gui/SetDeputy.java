@@ -62,7 +62,7 @@ public class SetDeputy extends Startseite implements Button.ClickListener {
 			}
 	
 			if(aus == ""){
-				System.out.println("Du bist zu blöd etwas auszuwählen !!!");	//"Fehlermeldung" ;)
+				InfoWindow err = new InfoWindow("Fehler","Wählen Sie bitte einen Nutzer aus",setD);	//"Fehlermeldung" ;)
 			}
 			else{
 				cont.setDep(aus);

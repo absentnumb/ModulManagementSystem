@@ -42,7 +42,8 @@ public void buttonClick (Button.ClickEvent event) {
 			}
 	
 			if(datumstr == ""){
-				System.out.println("Datum eingeben");	//"Fehlermeldung" ;)
+				InfoWindow err = new InfoWindow("Fehler","Geben Sie bitte ein Datum ein",dead);
+				//System.out.println("Datum eingeben");	//"Fehlermeldung" ;)
 			}
 			else{
 				//contDek.saveDatum(datumstr);

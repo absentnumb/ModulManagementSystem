@@ -82,10 +82,10 @@ public class LoginApplication extends Application implements Button.ClickListene
     		String em = uMail.getValue().toString();
     		String p1 = pass1.getValue().toString();
     		String p2 = pass2.getValue().toString();
-    		System.out.println(p1);
+    		/*System.out.println(p1);
     		System.out.println(p2);
     		System.out.println(us);
-    		System.out.println(em);
+    		System.out.println(em);*/
     		
     		if (us.equals("")||em.equals("")||p1.equals("")||p2.equals("") ||!(p1.equals(p2))) {
     			registerError();

@@ -149,7 +149,7 @@ public class ModulEditCreate extends Startseite implements Button.ClickListener{
 			Modul tmp1 = new Modul(tmp.getid(), title1, lp2, language1, turn1, cont.getID(responsible1), 
 							responsible1, cont.getID(doz1), doz1,filing1, requirements1, aims1, 
 							content1, lit1, events1, work1, exams1, formcond1, grades1 );
-			System.out.println(tmp1.gettitle());
+			//System.out.println(tmp1.gettitle());
 			contD.speichernModul(tmp1);//Methode in Controller-Klasse
 		}
 		if(event.getButton()==logout){
