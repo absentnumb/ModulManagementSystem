@@ -17,7 +17,7 @@ import control.Controller;
 
 public class SetDeputy extends Startseite implements Button.ClickListener {
 	
-	private Button ok;
+	private Button ok,delete;
 	Window setD;
 	//private VerticalLayout vertical;
 	private AbsoluteLayout mainLayout;
@@ -65,9 +65,32 @@ public class SetDeputy extends Startseite implements Button.ClickListener {
 				InfoWindow err = new InfoWindow("Fehler","Wählen Sie bitte einen Nutzer aus",setD);	//"Fehlermeldung" ;)
 			}
 			else{
-				cont.setDep(aus);
+				InfoWindow isDep;
+				if(cont.getStell(cont.getID(aus))) 
+					isDep = new InfoWindow("Fehler","Dieser Nutzer ist bereits ein Stellvertreter",setD);
+				else cont.setDep(aus,true);
 			}
 		}
+		
+		if(event.getButton()==delete){
+			try {
+				aus = benutzer.getValue().toString();
+			}
+			catch (NullPointerException e){
+				aus = "";
+			}	
+			if(aus == ""){
+				InfoWindow err = new InfoWindow("Fehler","Wählen Sie bitte einen Nutzer aus",setD);	//"Fehlermeldung" ;)
+			}
+			else{
+				InfoWindow isntDep;
+				if(cont.getMyStell(cont.getID(aus)))
+					cont.setDep(aus, false);
+				else
+					isntDep = new InfoWindow("Fehler","Dieser Nutzer ist nicht Ihr Stellvertreter",setD);
+			}
+		}
+		
 		if(event.getButton()== logout){
 		       starta.getMainWindow().getApplication().close();
 				
@@ -121,12 +144,21 @@ public class SetDeputy extends Startseite implements Button.ClickListener {
 		
 		// ok
 		ok = new Button();
-		ok.setCaption("ernennen");
+		ok.setCaption("Stellvertreter ernennen");
 		ok.setImmediate(false);
-		ok.setWidth("-1px");
+		ok.setWidth("25%");
 		ok.setHeight("-1px");
 		ok.addListener(this);
 		mainLayout.addComponent(ok, "top:83.0%;left:35.0%;");
+		
+		// delete
+		delete = new Button();
+		delete.setCaption("Stellvertreter löschen");
+		delete.setImmediate(false);
+		delete.setWidth("25%");
+		delete.setHeight("-1px");
+		delete.addListener(this);
+		mainLayout.addComponent(delete, "top:88.0%;left:35.0%;");
 		
 		// logout
 		logout = new Button();
@@ -136,7 +168,7 @@ public class SetDeputy extends Startseite implements Button.ClickListener {
 		logout.setHeight("-1px");
 		logout.setStyleName(BaseTheme.BUTTON_LINK);
 		logout.addListener(this);
-		mainLayout.addComponent(logout, "top:88.0%;left:35.0%;");
+		mainLayout.addComponent(logout, "top:93.0%;left:35.0%;");
 		
 		return mainLayout;
 	}
