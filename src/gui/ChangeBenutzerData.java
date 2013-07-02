@@ -9,7 +9,7 @@ import com.vaadin.ui.themes.BaseTheme;
 import com.vaadin.ui.themes.Runo;
 
 public class ChangeBenutzerData extends Startseite implements Button.ClickListener{
-	Window change, errW;
+	Window change;  //, errW;
 	Label label;
 	PasswordField oldPass, newPass, newPass1;
 	TextField uName, uMail;
@@ -95,8 +95,8 @@ public void buttonClick(ClickEvent event){
 	}	
 }
 private void displayError(String text) {
-	
-		errW = new Window("Fehler");
+		InfoWindow error = new InfoWindow("Fehler",text,change);
+		/*errW = new Window("Fehler");
 
 		Label wrong = new Label(text);
 		Layout error = new VerticalLayout();
@@ -105,7 +105,7 @@ private void displayError(String text) {
 		errW.addComponent(wrong);
 		change.addWindow(errW);
 		errW.setHeight("200px");
-		errW.setWidth("200px");
+		errW.setWidth("200px");*/
 }
 
 private AbsoluteLayout buildMainLayout() {

@@ -16,7 +16,7 @@ public class ModulhandbuchRequest extends LoginApplication implements Button.Cli
 	/*Button recommend = new Button("anfordern");
 	Button okay2;
 	VerticalLayout mlist = new VerticalLayout();*/
-	private Button recommend,back, okay2;
+	private Button recommend,back;      //, okay2;
 	private Label label;
 	private AbsoluteLayout mainLayout;
 	private String [] tmp;
@@ -85,9 +85,9 @@ public class ModulhandbuchRequest extends LoginApplication implements Button.Cli
 				read = "";
 				e.printStackTrace();
 			}
-    		if(event.getButton() == okay2) {
+    		/*if(event.getButton() == okay2) {
         		mod.removeWindow(selErrW);
-        	}
+        	}*/
 	
 			if(read.equals("")){
 				displaySelectionError();
@@ -151,8 +151,8 @@ public class ModulhandbuchRequest extends LoginApplication implements Button.Cli
     
     //Fehlerfenster wenn kein Modul ausgewählt wird
     public void displaySelectionError() {
-    	
-    	selErrW = new Window("Fehler");
+    	InfoWindow error = new InfoWindow("Modul wählen","Wählen Sie bitte ein Modul aus",mainWindow);
+    	/*selErrW = new Window("Fehler");
     	okay2 = new Button("Ok");
     	wrong2 = new Label("Sie müssen ein Modul auswählen!");
     	Layout selError = new VerticalLayout();
@@ -163,6 +163,6 @@ public class ModulhandbuchRequest extends LoginApplication implements Button.Cli
     	mod.addWindow(selErrW);
     	selErrW.setHeight("200px");
     	selErrW.setWidth("200px");
-    	okay2.addListener(this);
+    	okay2.addListener(this);*/
     }
 }
