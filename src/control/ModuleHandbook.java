@@ -53,6 +53,8 @@ public class ModuleHandbook{
 	
 	private String path;
 	
+	private String operatingSystem = "";
+	
 	/*Die Methode "generatePDF" erzeugt das Modulhandbuch als PDF. Durch
 	 *  rekursivem Aufruf der Methode "createLatexCode" wird die Struktur
 	 *  aus Fächern und Modulen durchlaufen (Fächer können wiederum
@@ -127,7 +129,7 @@ public class ModuleHandbook{
 		//run("cmd /c pdflatex.exe  " + path + "\\Modulhandbuch"+dataID+".tex");
 	
 		run("pdflatex Modulhandbuch"+modulhandbuchname+semester+".tex" +
-				" -output-directory=/", path);
+				" -output-directory=", path);
 		//run("cmd /c Modulhandbuch"+dataID+".pdf");
 		//FileResource fr = new FileResource(new File( path + "Modulhandbuch"+dataID+".pdf"), null);
 		
@@ -221,8 +223,17 @@ public class ModuleHandbook{
 	//Führt einen Befehl über die command-line aus 
 	private void run(String command, String path) {
 		try {
-			Runtime rt = Runtime.getRuntime();
-			Process p = rt.exec(command,null, new File(path));
+			Runtime rt = null;
+			Process p = null;
+			if (detectOperatingSystem().equals("Windows")) {
+				rt = Runtime.getRuntime();
+				p = rt.exec(command+path,null);
+			} else if (detectOperatingSystem().equals("Linux")) {
+				rt = Runtime.getRuntime();
+				p = rt.exec(command,null, new File(path));
+			} else if (detectOperatingSystem().equals("Unknown Operating System")) {
+				System.out.println("PDF not created. The Operating System is unknown.");
+			}
 			InputStream is = p.getInputStream();
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
 			String s = "";
@@ -284,6 +295,22 @@ public class ModuleHandbook{
 			files.add(f);
 		}
 		return files;		
+	}
+	
+	//Ermittle das verwendete Betriebssystem (erkennt Windows oder Linux)
+	private String detectOperatingSystem() {
+		String os = "";
+		
+		String name = System.getProperty("os.name").toLowerCase();
+		if (name.indexOf("windows") >= 0) {
+			os = "Windows";
+		} else if (name.indexOf("linux") >=0) {
+			os = "Linux";
+		} else {
+			os = "Unknown Oprating System";
+		}
+		
+		return os;
 	}
 	
 	

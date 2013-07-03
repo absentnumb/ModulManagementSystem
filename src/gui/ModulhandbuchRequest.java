@@ -72,6 +72,11 @@ public class ModulhandbuchRequest extends LoginApplication implements Button.Cli
 				ModuleHandbook handbuch = new ModuleHandbook();
 			FileResource test= handbuch.generatePDF(modul, start);
 			Link l = new Link("Download the Modulehandbook here", test, "Download", 0, 0, Link.TARGET_BORDER_DEFAULT);
+			/*Link l = new Link("Download the Modulehandbook here", test);
+			l.setTargetName("Download");
+			l.setTargetBorder(Link.TARGET_BORDER_DEFAULT);
+			l.setTargetHeight(0);
+			l.setTargetWidth(0);*/
 			Window linkPop = new Window("Link");
 			linkPop.addComponent(l);
 	    
