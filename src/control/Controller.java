@@ -160,7 +160,7 @@ public class Controller {
 		int stellid = 0;
 		int id = blarghs.getNewId();
 		
-		Benutzer test = new Benutzer(id, us, p1, em, dozent, dekan, dez2, admin, stell, stellid);
+		Benutzer test = new Benutzer(id, us, em, p1, dozent, dekan, dez2, admin, stell, stellid);
 		blarghs.newUser(test);
 	}
 
