@@ -1,6 +1,7 @@
 package gui;
 
 import com.vaadin.Application;
+import com.vaadin.terminal.ClassResource;
 import com.vaadin.terminal.ExternalResource;
 import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.*;
@@ -15,7 +16,7 @@ import control.Controller;
 public class LoginApplication extends Application implements Button.ClickListener {
 	
 	private Button login, /*okay,*/ save, modul, register;
-	Window mainWindow, modulW, errW, selErrW ,adminWindow, regW, regErrW;
+	Window mainWindow, modulW, errW, selErrW ,adminWindow, regW;  //, regErrW;
 	Controller control = new Controller(this);
 	private VerticalLayout vertical;
 	private AbsoluteLayout mainLayout;
@@ -139,12 +140,13 @@ public class LoginApplication extends Application implements Button.ClickListene
     	mainWindow.addWindow(regW);
     	regW.setHeight("300px");
     	regW.setWidth("200px");
+    	regW.center();
     	save.addListener(this);
     }
     
     //Failsafe für die Registration
     public void registerError() {
-    	regErrW = new Window("Fehler");
+    	InfoWindow info = new InfoWindow("Fehler","Die eingegebenen Daten sind unvollständig",mainWindow);/*regErrW = new Window("Fehler");
     	regErr = new Label("Daten unvollständig");
     	Layout re = new VerticalLayout();
     	
@@ -152,7 +154,7 @@ public class LoginApplication extends Application implements Button.ClickListene
     	regErrW.addComponent(regErr);
     	mainWindow.addWindow(regErrW);
     	regErrW.setHeight("50px");
-    	regErrW.setWidth("200px");
+    	regErrW.setWidth("200px");*/
     }
     
     private AbsoluteLayout buildMainLayout() {
@@ -166,6 +168,7 @@ public class LoginApplication extends Application implements Button.ClickListene
 		// top-level component properties
 		mainLayout.setWidth("100.0%");
 		mainLayout.setHeight("100.0%");
+		
 		
 		// login
 		login = new Button();
