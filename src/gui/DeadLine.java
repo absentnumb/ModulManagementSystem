@@ -124,9 +124,10 @@ private AbsoluteLayout buildMainLayout() {
 	archive = new Button();
 	archive.setCaption("Archivieren");
 	archive.setImmediate(false);
+	archive.addListener(this);
 	archive.setWidth("-1px");
 	archive.setHeight("-1px");
-	lay.addComponent(archive, "top:50.0%;left:30.0%");
+	lay.addComponent(archive, "top:50.0%;left:50.0%");
 	
 	
 	// logout
