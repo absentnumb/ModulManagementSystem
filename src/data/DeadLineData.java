@@ -11,7 +11,7 @@ import objects.Deadline;
 import objects.ModulKu;
 
 public class DeadLineData extends KillConnections{
-	Connection con;
+	private static Connection con;
 	private static final String NEWDEADLINE = "Insert into deadlinedata Values(?,?,?)";
 	private static final String NEWDEADLINEMESSAGE = "SELECT responsibleid FROM moduldata WHERE dozid=?";
 	

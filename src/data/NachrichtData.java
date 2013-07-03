@@ -11,7 +11,7 @@ import objects.Nachricht;
 
 public class NachrichtData extends KillConnections {
 	
-	Connection con;	
+	private static Connection con;	
 	private static final String LOADBENACHRICHTENLIST = "SELECT id FROM nachrichtendata WHERE modul!=0 && benutzer=?";
 	private static final String LOADNACHRICHT = "SELECT * FROM nachrichtendata WHERE id=?";
 	private static final String DELETE = "DELETE FROM nachrichtendata where id =?";

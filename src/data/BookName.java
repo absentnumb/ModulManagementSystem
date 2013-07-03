@@ -12,7 +12,7 @@ import com.mysql.jdbc.Connection;
 
 public class BookName extends KillConnections {
 	
-	Connection con;
+	private static Connection con;
 	
 	private static final String GETBOOKNAMES = "SELECT name FROM handbuchname";
 	private static final String GETBOOKIDS = "SELECT ID FROM handbuchname";

@@ -173,7 +173,7 @@ public class SetDeputy extends Startseite implements Button.ClickListener {
 		logout.setHeight("-1px");
 		logout.setStyleName(BaseTheme.BUTTON_LINK);
 		logout.addListener(this);
-		mainLayout.addComponent(logout, "top:98.0%;left:35.0%;");
+		mainLayout.addComponent(logout, "top:97.0%;left:35.0%;");
 		
 		// back
 		back = new Button();

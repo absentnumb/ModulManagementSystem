@@ -14,7 +14,7 @@ import com.mysql.jdbc.*;
 
 public class ModulDatabase extends KillConnections {
 	
-	Connection con;
+	private static Connection con;
 	
 	private static final String LOADMODULE = "SELECT * FROM moduldata WHERE id=?";
 	private static final String LOADMODULELIST = "SELECT id FROM moduldata WHERE dozid=?";

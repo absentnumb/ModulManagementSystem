@@ -12,7 +12,7 @@ import objects.Modul;
 
 public class BenutzerData extends KillConnections {
 	
-	Connection con;	
+	private static Connection con;	
 	
 	//ein ? gibt eine freie Variable an, in die entsprechend von der Methode eingesetzt wird
 	private static final String GETBENUTZERLISTE = "SELECT name FROM benutzer";

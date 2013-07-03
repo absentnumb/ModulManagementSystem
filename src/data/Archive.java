@@ -9,7 +9,7 @@ import com.mysql.jdbc.Connection;
 
 public class Archive extends KillConnections {
 
-	Connection con;
+	private static Connection con;
 	private static final String SAVEFILE = "INSERT INTO archiv VALUES(?, ?, ?)";
 	
 	public Archive(){

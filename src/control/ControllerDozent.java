@@ -31,7 +31,7 @@ public class ControllerDozent extends Controller{
 			
 		 Modul test = modulDatabase.loadModule(modul);			
 		 if(modulDatabase.getSperr(test.getid())== true){
-			 tmp.displayError("Modul bereits geänder warten auf bestätigung");
+			 tmp.displayError("Das Modul wurde bereits geändert. Warten Sie bitte auf eine Bestätigung");
 			 /* NOCH FEHLT POP FENSTER*/
 			 
 		 } else {

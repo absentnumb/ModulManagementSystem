@@ -16,7 +16,7 @@ import com.vaadin.ui.Window;
 
 public class ModulPufferData extends KillConnections {
 	
-	Connection con;
+	private static Connection con;
 	
 	private static final String WRITEBUFFERMODULE = "INSERT INTO modulpufferdata " +
 								"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?," +
