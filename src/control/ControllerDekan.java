@@ -5,8 +5,11 @@ import gui.LoginApplication;
 import gui.ModulhandbuchRequest;
 import gui.ModulhandbuchRequestAen;
 import gui.RequestView;
+import gui.Startseite;
 
 import java.util.LinkedList;
+
+import com.vaadin.ui.Window;
 
 import objects.Modul;
 import objects.ModulKu;
@@ -44,6 +47,9 @@ public class ControllerDekan extends Controller{
 			nachrichtenData.newNachricht(nachricht);
 			modulPufferData.deleteBufferModule(modul.getid());
 		}
+		Window old = login.getWindow("Aenderungsantrag");
+		Startseite tmp1 = new Startseite(login, userid,old);
+
 	}
 
 	//lädt Änderung

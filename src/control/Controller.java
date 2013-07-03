@@ -127,6 +127,8 @@ public class Controller {
 		if (Rang.equals("[Dozent]")){blarghs.setRangDozent(Id, true); blarghs.setRangDekan(Id, false); blarghs.setRangDez2(Id, false);}
 		if (Rang.equals("[Dekan]")){blarghs.setRangDekan(Id, true); blarghs.setRangDez2(Id, false); blarghs.setRangDozent(Id, false);}
 		if (Rang.equals("[Dezernat 2]")){blarghs.setRangDez2(Id, true); blarghs.setRangDozent(Id, false); blarghs.setRangDekan(Id, false);}*/
+		Window old = login.getWindow("adminWindow");
+		Startseite tmp1 = new Startseite(login, userid,old);
 		
 	}
 	
