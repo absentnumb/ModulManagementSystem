@@ -12,16 +12,17 @@ import control.ModuleHandbook;
 
 public class ModulhandbuchRequestAen extends Startseite implements Button.ClickListener {
 	
-	Window mod; //, selErrW;	
+	Window mod, newBook; //, selErrW;	
 	/*Button recommend = new Button("anfordern");
 	Button okay2;
 	VerticalLayout mlist = new VerticalLayout();*/
-	private Button recommend,back; //, okay2;
+	private Button recommend,back, create, okay2;
 	private Label label, wrong2;
 	private AbsoluteLayout mainLayout;
 	private String [] tmp;
 	private LinkedList<Integer> tmp2;
 	ListSelect modules;
+	TextField name;
 	public ModulhandbuchRequestAen( LinkedList<Integer> ids, String[] list) {
 		Window test = starta.getWindow("Modul auswählen");
 		if(test != null){
@@ -78,6 +79,18 @@ public class ModulhandbuchRequestAen extends Startseite implements Button.ClickL
     	if(event.getButton()== back){
     		starta.getMainWindow().getApplication().close();      
     	}    	
+    	if(event.getButton() == create){
+    		
+    		displayNewBook();
+    		
+    	}
+    	if(event.getButton() == okay2){
+    		String name1 =(String) name.getValue();
+    		
+    		contDek.saveHandbook(name1);
+
+    		
+    	}
     }
     
     private AbsoluteLayout buildMainLayout() {
@@ -115,6 +128,14 @@ public class ModulhandbuchRequestAen extends Startseite implements Button.ClickL
     	    recommend.setHeight("-1px");
     	    mainLayout.addComponent(recommend, "top:83.0%;left:35.0%;");
     	    
+    	    // create
+    	    create = new Button();
+    	    create.setCaption("ansehen");
+    	    create.setImmediate(true);
+    	    create.setWidth("-1px");
+    	    create.setHeight("-1px");
+    	    mainLayout.addComponent(create,  "top:88.0%;left:35.0%;");
+    	    
     	    // logout
     	    back = new Button();
     	    back.setCaption("Startseite");
@@ -123,25 +144,34 @@ public class ModulhandbuchRequestAen extends Startseite implements Button.ClickL
     	    back.setHeight("-1px");
     	    back.setStyleName(BaseTheme.BUTTON_LINK);
     	    back.addListener(this);
-    	    mainLayout.addComponent(back, "top:88.0%;left:35.0%;");
+    	    mainLayout.addComponent(back,"top:93.0%;left:35.0%;");
     	    
     	    return mainLayout;
     	}
     
     //Fehlerfenster wenn kein Modul ausgewählt wird
-    public void displaySelectionError() {
-    	InfoWindow error = new InfoWindow("Fehler","Wählen Sie bitte ein Modul aus",mod);
-    	/*selErrW = new Window("Fehler");
+    
+    
+    public void displayNewBook() {
+    	newBook = new Window("Handbuch erstellen");
     	okay2 = new Button("Ok");
-    	wrong2 = new Label("Sie müssen ein Modul auswählen!");
+    	Label wrong2 = new Label("Geben sie den Namen des Handbuches ein:");
+		name = new TextField();
     	Layout selError = new VerticalLayout();
     	
-    	selErrW.setContent(selError);
-    	selErrW.addComponent(wrong2);
-    	selErrW.addComponent(okay2);
-    	mod.addWindow(selErrW);
-    	selErrW.setHeight("200px");
-    	selErrW.setWidth("200px");
-    	okay2.addListener(this);*/
+    	newBook.setContent(selError);
+    	newBook.addComponent(wrong2);
+    	newBook.addComponent(okay2);
+    	
+    	mod.addWindow(newBook);
+    	newBook.setHeight("200px");
+    	newBook.setWidth("200px");
+    	
+    }
+    	
+    	
+    public void displaySelectionError() {
+    	InfoWindow error = new InfoWindow("Fehler","Wählen Sie bitte ein Modul aus",mod);
+   
     }
 }

@@ -102,4 +102,9 @@ public class ControllerDekan extends Controller{
 			nachrichtenData.newNachricht(deadLine);
 		}
 	}
+	public void saveHandbook(String name){
+		
+		book.newHandbook(name, userid);
+		
+	}
 }
