@@ -156,10 +156,7 @@ public class ModuleHandbook{
 			
 		return fr;
 	}
-	
-	
-	
-	
+		
 	//Methode zu Erzeugung des Modulhandbuches in Form von LateX-Code
 	//-------------
 	//Anmerkungen:
@@ -228,7 +225,7 @@ public class ModuleHandbook{
 			Process p = null;
 			if (detectOperatingSystem().equals("Windows")) {
 				rt = Runtime.getRuntime();
-				p = rt.exec(command+path,null);
+				p = rt.exec(command+"\""+path+"\"",null);
 			} else if (detectOperatingSystem().equals("Linux")) {
 				rt = Runtime.getRuntime();
 				p = rt.exec(command,null, new File(path));
