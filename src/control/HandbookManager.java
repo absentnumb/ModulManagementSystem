@@ -122,7 +122,7 @@ public class HandbookManager implements ClickListener, ItemClickListener{
 				gui.add1.setEnabled(false);
 				gui.add2.setEnabled(false);
 				
-				
+	
 			}
 			gui.choice.setValue("Ausgewähltes Element: Fach " + splittedString[2]);
 			
