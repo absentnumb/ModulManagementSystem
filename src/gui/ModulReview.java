@@ -1,4 +1,5 @@
 ﻿package gui;
+import java.net.URL;
 import java.sql.PreparedStatement;
 
 import java.sql.ResultSet;
@@ -18,7 +19,8 @@ public class ModulReview extends Startseite implements Button.ClickListener{
 	Window modEdCr; //, errW;
 	public ListSelect module; //login
 	private AbsoluteLayout mainLayout;
-	private Button create, aendern;
+	private Button create, aendern,back;
+	private URL oldURL;
 	private LinkedList<ModulKu> liste;
 	private Label label;
 	
@@ -46,6 +48,7 @@ public class ModulReview extends Startseite implements Button.ClickListener{
 		modEdCr.addComponent(aendern);*/
 		
 		Window old = starta.getWindow("Startseite");
+		oldURL = old.getURL();
 		old.open(new ExternalResource(modEdCr.getURL()));
 	
 		
@@ -62,6 +65,9 @@ public class ModulReview extends Startseite implements Button.ClickListener{
 			
 		if(event.getButton()== logout){
 		       starta.getMainWindow().getApplication().close();				
+		}
+		if(event.getButton()==back){
+			modEdCr.open(new ExternalResource(oldURL));
 		}
 		
 		if(event.getButton() == aendern){
@@ -128,7 +134,7 @@ public class ModulReview extends Startseite implements Button.ClickListener{
 		create.setWidth("25.0%");
 		create.setHeight("-1px");
 		create.addListener(this);		
-		mainLayout.addComponent(create, "top:83.0%;left:35.0%;");
+		mainLayout.addComponent(create, "top:88.0%;left:35.0%;");
 		
 		// logout
 		logout = new Button();
@@ -138,7 +144,17 @@ public class ModulReview extends Startseite implements Button.ClickListener{
 		logout.setHeight("-1px");
 		logout.addListener(this);
 		logout.setStyleName(BaseTheme.BUTTON_LINK);
-		mainLayout.addComponent(logout, "top:93.0%;left:35.0%;");
+		mainLayout.addComponent(logout, "top:97.0%;left:35.0%;");
+		
+		// back
+		back = new Button();
+		back.setCaption("Startseite");
+		back.setImmediate(true);
+		back.setWidth("-1px");
+		back.setHeight("-1px");
+		back.setStyleName(BaseTheme.BUTTON_LINK);
+		back.addListener(this);
+		mainLayout.addComponent(back, "top:94.0%;left:35.0%;");
 		
 		// aendern
 		aendern = new Button();
@@ -147,7 +163,7 @@ public class ModulReview extends Startseite implements Button.ClickListener{
 		aendern.setWidth("25.0%");
 		aendern.setHeight("-1px");
 		aendern.addListener(this);
-		mainLayout.addComponent(aendern, "top:88.0%;left:35.0%;");
+		mainLayout.addComponent(aendern, "top:83.0%;left:35.0%;");
 		
 		return mainLayout;
 	}

@@ -1,5 +1,7 @@
 package gui;
 
+import java.net.URL;
+
 import objects.Benutzer;
 
 import com.vaadin.terminal.ExternalResource;
@@ -13,9 +15,10 @@ public class ChangeBenutzerData extends Startseite implements Button.ClickListen
 	Label label;
 	PasswordField oldPass, newPass, newPass1;
 	TextField uName, uMail;
-	Button save;
+	Button save,back;
 	Benutzer tmp1;
 	private AbsoluteLayout mainLayout;
+	private URL oldURL;
 	
 public ChangeBenutzerData(Benutzer tmp){
 	tmp1 = tmp; 
@@ -60,6 +63,7 @@ public ChangeBenutzerData(Benutzer tmp){
 	
 	
 	Window old = starta.getWindow("Startseite");
+	oldURL = old.getURL();
 	old.open(new ExternalResource(change.getURL()));
 	
 }
@@ -93,6 +97,9 @@ public void buttonClick(ClickEvent event){
 	if(event.getButton()== logout){
 	       starta.getMainWindow().getApplication().close();			
 	}	
+	if(event.getButton()==back){
+		change.open(new ExternalResource(oldURL));
+	}
 }
 private void displayError(String text) {
 		InfoWindow error = new InfoWindow("Fehler",text,change);
@@ -137,6 +144,16 @@ private AbsoluteLayout buildMainLayout() {
 	save.setHeight("-1px");
 	mainLayout.addComponent(save, "top:75.0%;left:35.0%;");
 	
+	// back
+	back = new Button();
+	back.setCaption("Startseite");
+	back.setImmediate(true);
+	back.setWidth("-1px");
+	back.setHeight("-1px");
+	back.setStyleName(BaseTheme.BUTTON_LINK);
+	back.addListener(this);
+	mainLayout.addComponent(back, "top:81.0%;left:35.0%;");
+	
 	// logout
 	logout = new Button();
 	logout.setCaption("logout");
@@ -144,7 +161,7 @@ private AbsoluteLayout buildMainLayout() {
 	logout.setWidth("-1px");
 	logout.setHeight("-1px");
 	logout.setStyleName(BaseTheme.BUTTON_LINK);
-	mainLayout.addComponent(logout, "top:80.0%;left:35.0%;");
+	mainLayout.addComponent(logout, "top:85.0%;left:35.0%;");
 	
 	// uName
 	uName = new TextField();

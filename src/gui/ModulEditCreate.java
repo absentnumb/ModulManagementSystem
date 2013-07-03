@@ -1,5 +1,7 @@
 package gui;
 
+import java.net.URL;
+
 import objects.Modul;
 
 import com.vaadin.terminal.ExternalResource;
@@ -15,7 +17,8 @@ public class ModulEditCreate extends Startseite implements Button.ClickListener{
 	Window createW;
 	private AbsoluteLayout mainLayout;
 	Modul tmp,in;
-	private Button save;
+	private Button save,back;
+	private URL oldURL;
 	
 	//gibt vorhandene Werte in Textboxen zur Bearbeitung aus
 	public ModulEditCreate(Modul b){
@@ -111,7 +114,7 @@ public class ModulEditCreate extends Startseite implements Button.ClickListener{
 		 logout.addListener(this);
 		 tmp = b;
 		 Window old = starta.getWindow("Modulbearbeiten");
-			
+		 oldURL = old.getURL();
 		 old.open(new ExternalResource(createW.getURL()));
 			//starta.removeWindow(old);	
 
@@ -154,6 +157,9 @@ public class ModulEditCreate extends Startseite implements Button.ClickListener{
 		}
 		if(event.getButton()==logout){
 			starta.getMainWindow().getApplication().close();
+		}
+		if(event.getButton()==back){
+			createW.open(new ExternalResource(oldURL));
 		}
 	}	
 	
@@ -314,30 +320,40 @@ public class ModulEditCreate extends Startseite implements Button.ClickListener{
 		mainLayout.addComponent(grades, "top:92.0%;left:25.0%;");
 		
 		// save
-				save = new Button();
-				save.setCaption("speichern");
-				save.setImmediate(true);
-				save.setWidth("-1px");
-				save.setHeight("-1px");
-				mainLayout.addComponent(save, "top:96.8%;left:25.0%;");
+		save = new Button();
+		save.setCaption("speichern");
+		save.setImmediate(true);
+		save.setWidth("-1px");
+		save.setHeight("-1px");
+		mainLayout.addComponent(save, "top:96.8%;left:25.0%;");
 				
-				// label
-				label = new Label();
-				label.setImmediate(false);
-				label.setWidth("-1px");
-				label.setHeight("-1px");
-				label.setValue("Modul bearbeiten");
-				label.setStyleName(Runo.LABEL_H1);
-				mainLayout.addComponent(label, "top:6.2%;left:25.0%;");
+		// label
+		label = new Label();
+		label.setImmediate(false);
+		label.setWidth("-1px");
+		label.setHeight("-1px");
+		label.setValue("Modul bearbeiten");
+		label.setStyleName(Runo.LABEL_H1);
+		mainLayout.addComponent(label, "top:6.2%;left:25.0%;");
 				
-				// logout
-				logout = new Button();
-				logout.setCaption("logout");
-				logout.setImmediate(false);
-				logout.setWidth("-1px");
-				logout.setHeight("-1px");
-				logout.setStyleName(BaseTheme.BUTTON_LINK);
-				mainLayout.addComponent(logout, "top:98.2%;left:25.0%;");
+		// logout
+		logout = new Button();
+		logout.setCaption("logout");
+		logout.setImmediate(false);
+		logout.setWidth("-1px");
+		logout.setHeight("-1px");
+		logout.setStyleName(BaseTheme.BUTTON_LINK);
+		mainLayout.addComponent(logout, "top:99%;left:25.0%;");
+				
+		// back
+		back = new Button();
+		back.setCaption("Abbruch");
+		back.setImmediate(true);
+		back.setWidth("-1px");
+		back.setHeight("-1px");
+		back.setStyleName(BaseTheme.BUTTON_LINK);
+		back.addListener(this);
+		mainLayout.addComponent(back, "top:98.0%;left:25.0%;");
 		
 		return mainLayout;
 	}

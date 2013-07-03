@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.util.LinkedList;
 
 import com.vaadin.event.*;
@@ -17,7 +18,8 @@ import control.Controller;
 
 public class UserRightAdministration extends Startseite implements Button.ClickListener {
 	
-	private Button speichern,aendern,logout,okay;
+	private Button speichern,aendern,logout,back;
+	private URL oldURL;
 	private Label label;
 	OptionGroup group;
 	Window auswahlW, admin;   //, errW;
@@ -49,6 +51,7 @@ public class UserRightAdministration extends Startseite implements Button.ClickL
 		admin.setContent(mainLayout);
 		
 		Window old = starta.getWindow("Startseite");
+		oldURL = old.getURL();
 		old.open(new ExternalResource(admin.getURL()));
 		//starta.removeWindow(old);	
 
@@ -140,6 +143,9 @@ public class UserRightAdministration extends Startseite implements Button.ClickL
 		if(event.getButton() == logout){
 			starta.getMainWindow().getApplication().close();
 		}
+		if(event.getButton()==back){
+			admin.open(new ExternalResource(oldURL));
+		}
 	}
 	
 	//schreibt getroffene Rangauswahl in einen String um
@@ -226,7 +232,17 @@ public class UserRightAdministration extends Startseite implements Button.ClickL
 		logout.setHeight("-1px");
 		logout.setStyleName(BaseTheme.BUTTON_LINK);
 		logout.addListener(this);
-		mainLayout.addComponent(logout, "top:88.0%;left:35.0%;");
+		mainLayout.addComponent(logout, "top:93.0%;left:35.0%;");
+		
+		// back
+		back = new Button();
+		back.setCaption("Startseite");
+		back.setImmediate(true);
+		back.setWidth("-1px");
+		back.setHeight("-1px");
+		back.setStyleName(BaseTheme.BUTTON_LINK);
+		back.addListener(this);
+		mainLayout.addComponent(back, "top:89.0%;left:35.0%;");
 		
 		return mainLayout;
 	}
