@@ -15,7 +15,7 @@ import com.vaadin.ui.themes.Runo;
 
 public class ModulReview extends Startseite implements Button.ClickListener{
 	String savestr;	
-	Window modEdCr, errW;
+	Window modEdCr; //, errW;
 	public ListSelect module; //login
 	private AbsoluteLayout mainLayout;
 	private Button create, aendern;
@@ -153,8 +153,8 @@ public class ModulReview extends Startseite implements Button.ClickListener{
 	}
 	
 	public void displayError(String text) {
-		
-		errW = new Window("Fehler");
+		InfoWindow error = new InfoWindow("Fehler",text,modEdCr);
+		/*errW = new Window("Fehler");
 
 		Label wrong = new Label(text);
 		Layout error = new VerticalLayout();
@@ -163,7 +163,7 @@ public class ModulReview extends Startseite implements Button.ClickListener{
 		errW.addComponent(wrong);
 		modEdCr.addWindow(errW);
 		errW.setHeight("200px");
-		errW.setWidth("200px");
+		errW.setWidth("200px");*/
 }
 }
 

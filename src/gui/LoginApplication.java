@@ -14,7 +14,7 @@ import control.Controller;
  */
 public class LoginApplication extends Application implements Button.ClickListener {
 	
-	private Button login, okay, save, modul, register;
+	private Button login, /*okay,*/ save, modul, register;
 	Window mainWindow, modulW, errW, selErrW ,adminWindow, regW, regErrW;
 	Controller control = new Controller(this);
 	private VerticalLayout vertical;
@@ -73,19 +73,19 @@ public class LoginApplication extends Application implements Button.ClickListene
     	if (event.getButton() == modul) {
     		control.requestModule(this);
     	}
-    	if(event.getButton() == okay) {
+    	/*if(event.getButton() == okay) {
     		mainWindow.removeWindow(errW);
-    	}
+    	}*/
     
     	if(event.getButton() == save) {
     		String us = uName.getValue().toString();
     		String em = uMail.getValue().toString();
     		String p1 = pass1.getValue().toString();
     		String p2 = pass2.getValue().toString();
-    		System.out.println(p1);
+    		/*System.out.println(p1);
     		System.out.println(p2);
     		System.out.println(us);
-    		System.out.println(em);
+    		System.out.println(em);*/
     		
     		if (us.equals("")||em.equals("")||p1.equals("")||p2.equals("") ||!(p1.equals(p2))) {
     			registerError();
@@ -98,8 +98,8 @@ public class LoginApplication extends Application implements Button.ClickListene
     
     //Fehlerfenster für falschen Username/falsches Passwort
     public void displayError() {
-    	
-    		errW = new Window("Fehler");
+    		InfoWindow test = new InfoWindow("Fehler","Nutzername oder Passwort falsch",mainWindow);
+    		/*errW = new Window("Fehler");
     		okay = new Button("Ok");
     		wrong = new Label("username/passwort falsch");
     		Layout error = new VerticalLayout();
@@ -110,7 +110,7 @@ public class LoginApplication extends Application implements Button.ClickListene
     		mainWindow.addWindow(errW);
     		errW.setHeight("200px");
     		errW.setWidth("200px");
-    		okay.addListener(this);
+    		okay.addListener(this);*/
     }
     
    

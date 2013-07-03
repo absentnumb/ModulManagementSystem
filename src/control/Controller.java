@@ -76,7 +76,18 @@ public class Controller {
 	public int getID(String name){
 		return blarghs.getID(name);
 	}
-		
+	
+	//gibt an, ob ein User bereits Stellvertreter ist
+	public boolean getStell(int id){
+		return blarghs.getRangStell(id);
+	}
+	
+	//gibt an, ob der User idStell Stellvertreter von User userid ist
+	public  boolean getMyStell(int idStell){
+		return (blarghs.getRangStell(idStell)
+				&&blarghs.getStellID(idStell)==userid);
+	}
+	
 	//gibt an, ob ein User Rechte hat, auch über Stellvertreter
 	public boolean getAdmin(int id){
 		if(blarghs.getRangAdmin(id))return true;
@@ -159,20 +170,24 @@ public class Controller {
 		ModulhandbuchRequest req = new ModulhandbuchRequest(start, ids, list);
 	}
 
-	public void setDep (String StellName){
+	public void setDep (String StellName,boolean bool){
 		int ID = blarghs.getID(StellName);
-		blarghs.setRangStell(ID, true);
-		blarghs.setStellID(ID, userid);
-		if(blarghs.getRangDozent(userid)) { blarghs.setRangDozent(ID, true); }
+		if(bool){			
+			blarghs.setRangStell(ID, true);
+			blarghs.setStellID(ID, userid);
+		}
+		else {
+			blarghs.setRangStell(ID,false);
+			blarghs.setStellID(ID, 0);
+		}
+		/*if(blarghs.getRangDozent(userid)) { blarghs.setRangDozent(ID, true); }
 		if(blarghs.getRangDekan(userid)) { blarghs.setRangDekan(ID, true); }
 		if(blarghs.getRangDez2(userid)) { blarghs.setRangDez2(ID, true); }
-		if(blarghs.getRangAdmin(userid)) { blarghs.setRangAdmin(ID, true); }
+		if(blarghs.getRangAdmin(userid)) { blarghs.setRangAdmin(ID, true); }*/
 	}
-	public void changeBenutzer(Benutzer neu){
-		
+	public void changeBenutzer(Benutzer neu){		
 		blarghs.deleteUser(neu.getId());
-		blarghs.newUser(neu);
-		
+		blarghs.newUser(neu);		
 	}
 	public Benutzer loadBenutzer(int userid1){
 		Benutzer tmp = blarghs.loadBenutzer(userid1);

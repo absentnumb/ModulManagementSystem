@@ -17,7 +17,7 @@ import com.vaadin.ui.themes.Runo;
 
 public class NewMessage extends Startseite implements Button.ClickListener {
 	
-	private Window newMess, messageW;
+	private Window newMess;  //, messageW;
 	private AbsoluteLayout mainLayout;
 	private Label label;
 	ListSelect nachricht;
@@ -64,7 +64,8 @@ public class NewMessage extends Startseite implements Button.ClickListener {
 			String tmp = nachricht.getValue().toString();
 			String[] splitResult = tmp.split(":");
 			int listnr = Integer.parseInt(splitResult[0])-1;
-			messageW = new Window(lis.get(listnr).getBetreff());
+			InfoWindow messageW = new InfoWindow(lis.get(listnr).getBetreff(),lis.get(listnr).getbeschreibung(),newMess);
+			/*messageW = new Window(lis.get(listnr).getBetreff());
     		
     		Layout mess = new VerticalLayout();
     		
@@ -74,12 +75,12 @@ public class NewMessage extends Startseite implements Button.ClickListener {
     		okay = new Button("ok");
     		messageW.addComponent(okay);
     		newMess.addWindow(messageW);
-    		okay.addListener(this);
+    		okay.addListener(this);*/
 			
 		}
-		if(event.getButton() == okay) {
+		/*if(event.getButton() == okay) {
     		newMess.removeWindow(messageW);
-    	}
+    	}*/
 		if(event.getButton()== logout){
 		       starta.getMainWindow().getApplication().close();				
 		}

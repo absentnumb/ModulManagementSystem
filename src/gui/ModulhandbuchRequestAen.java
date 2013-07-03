@@ -12,11 +12,11 @@ import control.ModuleHandbook;
 
 public class ModulhandbuchRequestAen extends Startseite implements Button.ClickListener {
 	
-	Window mod, selErrW;	
+	Window mod; //, selErrW;	
 	/*Button recommend = new Button("anfordern");
 	Button okay2;
 	VerticalLayout mlist = new VerticalLayout();*/
-	private Button recommend,back, okay2;
+	private Button recommend,back; //, okay2;
 	private Label label, wrong2;
 	private AbsoluteLayout mainLayout;
 	private String [] tmp;
@@ -130,8 +130,8 @@ public class ModulhandbuchRequestAen extends Startseite implements Button.ClickL
     
     //Fehlerfenster wenn kein Modul ausgewählt wird
     public void displaySelectionError() {
-    	
-    	selErrW = new Window("Fehler");
+    	InfoWindow error = new InfoWindow("Fehler","Wählen Sie bitte ein Modul aus",mod);
+    	/*selErrW = new Window("Fehler");
     	okay2 = new Button("Ok");
     	wrong2 = new Label("Sie müssen ein Modul auswählen!");
     	Layout selError = new VerticalLayout();
@@ -142,6 +142,6 @@ public class ModulhandbuchRequestAen extends Startseite implements Button.ClickL
     	mod.addWindow(selErrW);
     	selErrW.setHeight("200px");
     	selErrW.setWidth("200px");
-    	okay2.addListener(this);
+    	okay2.addListener(this);*/
     }
 }
