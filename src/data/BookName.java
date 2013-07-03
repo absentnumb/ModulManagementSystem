@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
+import objects.Modul;
+
 import com.mysql.jdbc.Connection;
 
 public class BookName extends KillConnections {
@@ -16,6 +18,9 @@ public class BookName extends KillConnections {
 	private static final String GETBOOKIDS = "SELECT ID FROM handbuchname";
 	private static final String GETBOOKNAMESD = "SELECT name FROM handbuchname WHERE dekan=?";
 	private static final String GETBOOKIDSD = "SELECT ID FROM handbuchname WHERE dekan=?";
+	private static final String NEWHAND ="INSERT INTO handbookname VALUES(?,?,?)";
+	private static final String GETNEWID = "SELECT id FROM handbookname ORDER BY id DESC LIMIT 1";
+
 	
 	public BookName(){
 		
@@ -106,4 +111,67 @@ public LinkedList<Integer> getBookID(int user){
 		return arr;
 	}
 
+public void newHandbook(String name, int user){
+	
+
+		
+		PreparedStatement psmt = null;
+		ResultSet data = null;
+
+		try {
+			con.setAutoCommit(false);
+
+			psmt = con.prepareStatement(NEWHAND);
+			
+			psmt.setInt(1, getNewId());
+			psmt.setString(2, name);
+			psmt.setInt(3, user);
+	
+
+			psmt.executeUpdate();
+			con.commit();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeConnections(data, psmt);
+		}
+		
+	
+	
+	
+}
+
+public int getNewId() {
+	
+	int id = 0;
+	
+	PreparedStatement psmt = null;
+	ResultSet data = null;
+
+	try {
+
+		con.setAutoCommit(false);
+
+		psmt = con.prepareStatement(GETNEWID);
+
+		data = psmt.executeQuery();
+
+		data.next();
+		id = data.getInt("id");
+
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} catch (Exception e) {
+		e.printStackTrace();
+	} finally {
+		closeConnections(data, psmt);
+	}
+	
+	id = id+3;
+	System.out.println(id);
+	return id;
+}
 }

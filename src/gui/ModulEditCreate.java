@@ -124,6 +124,7 @@ public class ModulEditCreate extends Startseite implements Button.ClickListener{
 	//ButtonListener
 	public void buttonClick(Button.ClickEvent event){
 		if (event.getButton() == save){
+			try{
 			String title1 = (String)title.getValue();
 			String lp1 = (String)lp.getValue();
 			String language1 = (String)language.getValue();
@@ -154,6 +155,16 @@ public class ModulEditCreate extends Startseite implements Button.ClickListener{
 							content1, lit1, events1, work1, exams1, formcond1, grades1 );
 			//System.out.println(tmp1.gettitle());
 			contD.speichernModul(tmp1);//Methode in Controller-Klasse
+			}
+			catch(Exception e){
+			displayError("Bitte Felder mit * ausfüllen");	
+
+				
+			}
+			//finally{
+				
+				
+			//}
 		}
 		if(event.getButton()==logout){
 			starta.getMainWindow().getApplication().close();
@@ -177,7 +188,7 @@ public class ModulEditCreate extends Startseite implements Button.ClickListener{
 		
 		// title
 		title = new TextArea();
-		title.setCaption("Name:");
+		title.setCaption("Name:*");
 		if (in.gettitle()!=null)title.setValue(in.gettitle());
 		title.setImmediate(false);
 		title.setWidth("66.5%");
@@ -186,7 +197,7 @@ public class ModulEditCreate extends Startseite implements Button.ClickListener{
 		
 		// lp
 		lp = new TextArea();
-		lp.setCaption("Leistungspunkte:");
+		lp.setCaption("Leistungspunkte:*");
 		if (in.getlp()!=0)lp.setValue(in.getlp());
 		lp.setImmediate(false);
 		lp.setWidth("66.5%");
@@ -213,7 +224,7 @@ public class ModulEditCreate extends Startseite implements Button.ClickListener{
 		
 		// responsible
 		responsible = new TextArea();
-		responsible.setCaption("Dekan:");
+		responsible.setCaption("Dekan:*");
 		if (in.getresponsible()!=null)responsible.setValue(in.getresponsible());
 		responsible.setImmediate(false);
 		responsible.setWidth("66.5%");
@@ -222,7 +233,7 @@ public class ModulEditCreate extends Startseite implements Button.ClickListener{
 		
 		// doz
 		doz = new TextArea();
-		doz.setCaption("Dozent:");
+		doz.setCaption("Dozent:*");
 		if (in.getdoz()!=null)doz.setValue(in.getdoz());
 		doz.setImmediate(false);
 		doz.setWidth("66.5%");
@@ -357,4 +368,8 @@ public class ModulEditCreate extends Startseite implements Button.ClickListener{
 		
 		return mainLayout;
 	}
+	public void displayError(String text) {
+		InfoWindow error = new InfoWindow("Fehler",text,createW);
+
+}
 }
