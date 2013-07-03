@@ -1,5 +1,6 @@
 package gui;
 
+import java.net.URL;
 import java.util.LinkedList;
 import objects.Nachricht;
 
@@ -21,7 +22,8 @@ public class NewMessage extends Startseite implements Button.ClickListener {
 	private AbsoluteLayout mainLayout;
 	private Label label;
 	ListSelect nachricht;
-	private Button anzeigen,logout;
+	private Button anzeigen,logout,back;
+	private URL oldURL;
 	private Button okay;
 	private LinkedList<Nachricht>lis;
 	Label text;
@@ -42,6 +44,7 @@ public class NewMessage extends Startseite implements Button.ClickListener {
 		anzeigen.addListener(this);
 		newMess.setContent(mainLayout);
 		Window old = starta.getWindow("Startseite");
+		oldURL = old.getURL();
 		old.open(new ExternalResource(newMess.getURL()));
 		
 		
@@ -83,6 +86,9 @@ public class NewMessage extends Startseite implements Button.ClickListener {
     	}*/
 		if(event.getButton()== logout){
 		       starta.getMainWindow().getApplication().close();				
+		}
+		if(event.getButton()==back){
+			newMess.open(new ExternalResource(oldURL));
 		}
 	}
 	private AbsoluteLayout buildMainLayout() {
@@ -128,7 +134,17 @@ public class NewMessage extends Startseite implements Button.ClickListener {
 		logout.setHeight("-1px");
 		logout.setStyleName(BaseTheme.BUTTON_LINK);
 		logout.addListener(this);
-		mainLayout.addComponent(logout, "top:88.0%;left:35.0%;");
+		mainLayout.addComponent(logout, "top:93.0%;left:35.0%;");
+		
+		// back
+		back = new Button();
+		back.setCaption("Startseite");
+		back.setImmediate(true);
+		back.setWidth("-1px");
+		back.setHeight("-1px");
+		back.setStyleName(BaseTheme.BUTTON_LINK);
+		back.addListener(this);
+		mainLayout.addComponent(back, "top:89.0%;left:35.0%;");
 		
 		return mainLayout;
 	}

@@ -1,5 +1,7 @@
 package gui;
 
+import java.net.URL;
+
 import com.vaadin.terminal.ExternalResource;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.BaseTheme;
@@ -14,7 +16,8 @@ public class DeadLine extends Startseite implements Button.ClickListener {
 	String datumstr;
 	Label label;
 	TextField datum;  
-	private Button ok, archive, okay;
+	private Button ok, archive, okay,back;
+	private URL oldURL;
 	private AbsoluteLayout lay;
 	public DeadLine(){
 		Window test = starta.getWindow("Stellvertreter");
@@ -28,6 +31,7 @@ public class DeadLine extends Startseite implements Button.ClickListener {
 			dead.setContent(lay);
 			
 			Window old = starta.getWindow("Startseite");
+			oldURL = old.getURL();
 			old.open(new ExternalResource(dead.getURL()));	
 	}
 public void buttonClick (Button.ClickEvent event) {
@@ -60,8 +64,10 @@ public void buttonClick (Button.ClickEvent event) {
 			archiveDate();
 		}
 		if(event.getButton()== logout){
-		       starta.getMainWindow().getApplication().close();
-				
+		       starta.getMainWindow().getApplication().close();				
+		}
+		if(event.getButton()==back){
+			dead.open(new ExternalResource(oldURL));
 		}
 	}
 
@@ -130,6 +136,15 @@ private AbsoluteLayout buildMainLayout() {
 	archive.setHeight("-1px");
 	lay.addComponent(archive, "top:50.0%;left:50.0%");
 	
+	// back
+	back = new Button();
+	back.setCaption("Startseite");
+	back.setImmediate(true);
+	back.setWidth("-1px");
+	back.setHeight("-1px");
+	back.setStyleName(BaseTheme.BUTTON_LINK);
+	back.addListener(this);
+	lay.addComponent(back, "top:61.0%;left:35.0%;");
 	
 	// logout
 	logout = new Button();
@@ -139,7 +154,7 @@ private AbsoluteLayout buildMainLayout() {
 	logout.setHeight("-1px");
 	logout.setStyleName(BaseTheme.BUTTON_LINK);
 	logout.addListener(this);
-	lay.addComponent(logout, "top:60.0%;left:35.0%;");
+	lay.addComponent(logout, "top:65.0%;left:35.0%;");
 	
 	return lay;
 }

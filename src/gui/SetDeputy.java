@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.util.LinkedList;
 
 import com.vaadin.event.*;
@@ -17,7 +18,8 @@ import control.Controller;
 
 public class SetDeputy extends Startseite implements Button.ClickListener {
 	
-	private Button ok,delete;
+	private Button ok,delete,back;
+	private URL oldURL;
 	Window setD;
 	//private VerticalLayout vertical;
 	private AbsoluteLayout mainLayout;
@@ -45,6 +47,7 @@ public class SetDeputy extends Startseite implements Button.ClickListener {
 		//setD.addComponent(label);
 		openBenutzerListe(cont.benutzerListeAusgeben());
 		Window old = starta.getWindow("Startseite");
+		oldURL = old.getURL();
 		old.open(new ExternalResource(setD.getURL()));
 		//starta.removeWindow(old);	
 	
@@ -92,8 +95,10 @@ public class SetDeputy extends Startseite implements Button.ClickListener {
 		}
 		
 		if(event.getButton()== logout){
-		       starta.getMainWindow().getApplication().close();
-				
+		       starta.getMainWindow().getApplication().close();				
+		}
+		if(event.getButton()==back){
+			setD.open(new ExternalResource(oldURL));
 		}
 	}
 	
@@ -168,7 +173,17 @@ public class SetDeputy extends Startseite implements Button.ClickListener {
 		logout.setHeight("-1px");
 		logout.setStyleName(BaseTheme.BUTTON_LINK);
 		logout.addListener(this);
-		mainLayout.addComponent(logout, "top:93.0%;left:35.0%;");
+		mainLayout.addComponent(logout, "top:98.0%;left:35.0%;");
+		
+		// back
+		back = new Button();
+		back.setCaption("Startseite");
+		back.setImmediate(true);
+		back.setWidth("-1px");
+		back.setHeight("-1px");
+		back.setStyleName(BaseTheme.BUTTON_LINK);
+		back.addListener(this);
+		mainLayout.addComponent(back, "top:94.0%;left:35.0%;");
 		
 		return mainLayout;
 	}

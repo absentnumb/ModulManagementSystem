@@ -1,6 +1,7 @@
 package gui;
 
 
+import java.net.URL;
 import java.util.*;
 
 import objects.ModulKu;
@@ -17,7 +18,8 @@ public class ChangeRequest extends Startseite implements Button.ClickListener {
 	private Window changeR;
 	private AbsoluteLayout mainLayout;
 	ListSelect nachricht;
-	private Button auswaehlen; 
+	private Button auswaehlen,back;
+	private URL oldURL;
 	private Label label;
 	private LinkedList<Nachricht>list; private LinkedList<ModulKu> lis2;
 	
@@ -40,6 +42,7 @@ public class ChangeRequest extends Startseite implements Button.ClickListener {
 		
 		
 		Window old = starta.getWindow("Startseite");
+		oldURL = old.getURL();
 		old.open(new ExternalResource(changeR.getURL()));
 		//starta.removeWindow(old);	
 
@@ -71,6 +74,9 @@ public class ChangeRequest extends Startseite implements Button.ClickListener {
 		}
 		if(event.getButton()== logout){
 			starta.getMainWindow().getApplication().close();		
+		}
+		if(event.getButton()==back){
+			changeR.open(new ExternalResource(oldURL));
 		}
 	}
 	
@@ -117,7 +123,17 @@ public class ChangeRequest extends Startseite implements Button.ClickListener {
 		logout.setHeight("-1px");
 		logout.addListener(this);
 		logout.setStyleName(BaseTheme.BUTTON_LINK);
-		mainLayout.addComponent(logout, "top:88.0%;left:35.0%;");
+		mainLayout.addComponent(logout, "top:93.0%;left:35.0%;");
+		
+		// back
+		back = new Button();
+		back.setCaption("Startseite");
+		back.setImmediate(true);
+		back.setWidth("-1px");
+		back.setHeight("-1px");
+		back.setStyleName(BaseTheme.BUTTON_LINK);
+		back.addListener(this);
+		mainLayout.addComponent(back, "top:89.0%;left:35.0%;");
 		
 		return mainLayout;
 	}
