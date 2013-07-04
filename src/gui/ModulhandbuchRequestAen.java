@@ -30,7 +30,7 @@ public class ModulhandbuchRequestAen extends Startseite implements Button.ClickL
 		}
 		tmp = list;
 		tmp2 = ids;
-		mod = new Window("Modul auswählen");
+		mod = new Window("Modulhandbuch auswählen");
 		start.addWindow(mod);
 		/*mod.setContent(mlist);
 		recommend.addListener(this);*/
