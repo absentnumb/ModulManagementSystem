@@ -19,6 +19,8 @@ public class ModulDatabase extends KillConnections {
 	private static final String LOADMODULE = "SELECT * FROM moduldata WHERE id=?";
 	private static final String LOADMODULELIST = "SELECT id FROM moduldata WHERE dozid=?";
 	private static final String GETNEWID = "SELECT id FROM moduldata ORDER BY id DESC LIMIT 1";
+	private static final String GETNEWIDP = "SELECT id FROM modulpufferdata ORDER BY id DESC LIMIT 1";
+
 	private static final String SAVEMODULE = "INSERT INTO moduldata " +
 			"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?," +
 			" ?, ?, ?, ?, ?)";
@@ -213,11 +215,14 @@ public class ModulDatabase extends KillConnections {
 	//holt sich neue id für neues Modul
 	public int getNewId() {
 		
-		int id = 0;
+		int id1 = 0;
+		int id2 =0;
 		
 		PreparedStatement psmt = null;
+		PreparedStatement psmt1 = null;
 		ResultSet data = null;
-
+		ResultSet data1 = null;
+		
 		try {
 
 			con.setAutoCommit(false);
@@ -227,19 +232,44 @@ public class ModulDatabase extends KillConnections {
 			data = psmt.executeQuery();
 
 			data.next();
-			id = data.getInt("id");
-
+			id1 = data.getInt("id");
+		
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			closeConnections(data, psmt);
+
 		}
-		
-		id = id+3;
-		System.out.println(id);
-		return id;
+		try{
+			con.setAutoCommit(false);
+
+			psmt1 = con.prepareStatement(GETNEWIDP);
+
+			data1 = psmt1.executeQuery();
+
+			data1.next();
+			id2 = data1.getInt("id");
+			}
+		catch (SQLException e1) {
+		e1.printStackTrace();
+	} catch (Exception e1) {
+		e1.printStackTrace();
+	} finally {
+		closeConnections(data1, psmt1);
+	}
+	
+		if(id1 >= id2){
+		id1 = id1+3;
+		}
+		else{
+		id1 = id2+3;	
+			
+		}
+		System.out.println(id1);
+		return id1;
 	}
 	
 	//löscht Modul aus der Datenbank
