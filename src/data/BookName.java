@@ -146,22 +146,37 @@ public void newHandbook(String name, int user){
 
 public int getNewId() {
 	
-	int id = 0;
-	
+	//int id = 0;
+	int x = 1;
 	PreparedStatement psmt = null;
 	ResultSet data = null;
 
 	try {
-
+		
 		con.setAutoCommit(false);
-
+		/*
 		psmt = con.prepareStatement(GETNEWID);
 
 		data = psmt.executeQuery();
 
 		data.next();
 		id = data.getInt("id");
-
+	*/
+		psmt = con.prepareStatement("SELECT id FROM handbuchname ORDER BY id ASC");
+		data = psmt.executeQuery();
+		
+		//x ist die neue ID, fängt bei 1 an
+		int temp = 0;
+		
+		while (data.next()) {
+			temp = data.getInt(1);
+			if (x == temp) {
+				x = x + 3;
+			}
+		}
+		
+		
+		
 	} catch (SQLException e) {
 		e.printStackTrace();
 	} catch (Exception e) {
@@ -170,8 +185,12 @@ public int getNewId() {
 		closeConnections(data, psmt);
 	}
 	
-	id = id+3;
+	/*id = id+3;
 	System.out.println(id);
-	return id;
+	*/
+	//return id;
+	
+	return x;
+	
 }
 }
