@@ -120,7 +120,7 @@ public class Controller {
 		Id = blarghs.getID(Name);
 		blarghs.setRangDozent(Id, Rang.contains("Dozent"));
 		blarghs.setRangDekan(Id, Rang.contains("Dekan"));		
-		blarghs.setRangDez2(Id, Rang.contains("Dezernat 2"));
+		//blarghs.setRangDez2(Id, Rang.contains("Dezernat 2"));
 		/*if (Rang.equals("[Dekan, Dozent]")||Rang.equals("[Dozent, Dekan]")){blarghs.setRangDozent(Id, true); blarghs.setRangDekan(Id, true); blarghs.setRangDez2(Id, false);}				//mehrere M�glichkeiten, da Reihenfolge im String nicht festgelegt
 		if (Rang.equals("[Dozent, Dezernat 2]")||Rang.equals("[Dezernat 2, Dozent]")){blarghs.setRangDozent(Id, true); blarghs.setRangDez2(Id, true); blarghs.setRangDekan(Id, false);}
 		if (Rang.equals("[Dekan, Dezernat 2]")||Rang.equals("[Dezernat 2, Dekan]")){blarghs.setRangDekan(Id, true); blarghs.setRangDez2(Id, true); blarghs.setRangDozent(Id, false);}

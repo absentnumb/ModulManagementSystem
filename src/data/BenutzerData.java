@@ -138,7 +138,7 @@ public class BenutzerData extends KillConnections {
 	}
 	
 	//holt sich den Boolean aus der dez2-Spalte
-	public boolean getRangDez2(int Id){
+	/*public boolean getRangDez2(int Id){
 	
 	boolean rang = false;
 	
@@ -165,7 +165,7 @@ public class BenutzerData extends KillConnections {
 	}
 	
 	return rang;		
-}
+}*/
 
 	//holt sich den Boolean aus der Admin-Spalte
 	public boolean getRangAdmin(int Id){
@@ -249,11 +249,11 @@ public class BenutzerData extends KillConnections {
 	}
 		
 	//ist user dezernat2 bzw. dessen stellvertreter?
-	public boolean getStellDez2(int Id){
+	/*public boolean getStellDez2(int Id){
 		if(!getRangStell(Id)) return false;
 		else if (getRangDez2(getStellID(Id)))return true;
 		else return false;
-	}
+	}*/
 	
 	//holt sich die zum Username passende ID aus der Datenbank
 	public int getID(String Name){
@@ -372,7 +372,7 @@ public class BenutzerData extends KillConnections {
 	}
 
 	//schreibt neuen Dez2-Rang zu passender ID
-	public void setRangDez2(int Id, boolean Rang){
+	/*public void setRangDez2(int Id, boolean Rang){
 	
 	PreparedStatement psmt = null;
 
@@ -395,7 +395,7 @@ public class BenutzerData extends KillConnections {
 		closeConnections(null, psmt);
 	}
 	
-}
+}*/
 
 	//schreibt neuen Stellvertreter-Rang zu pqassender ID
 	public void setRangStell(int Id, boolean Rang){
