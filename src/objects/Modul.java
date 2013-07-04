@@ -29,7 +29,7 @@ public class Modul extends ModulKu {
 				 String conwork, String conexams, String conformcond, String congrades){
 		super(conid,contitle);
 		lp = conlp;
-		language = contitle;
+		language = conlanguage;
 		turn = conturn;
 		responsibleid = conresponsibleid;
 		responsible = conresponsible;	
