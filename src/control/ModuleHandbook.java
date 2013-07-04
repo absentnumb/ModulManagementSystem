@@ -218,7 +218,7 @@ public class ModuleHandbook{
 		
 	}
 	
-	//Führt einen Befehl über die command-line aus 
+	//Führt ein Programm wie über die command-line aus 
 	private void run(String command, String path) {
 		try {
 			Runtime rt = null;
@@ -243,6 +243,22 @@ public class ModuleHandbook{
 			e.printStackTrace();
 		}
 	}
+	
+	//Ermittle das verwendete Betriebssystem (erkennt Windows oder Linux)
+		private String detectOperatingSystem() {
+			String os = "";
+			
+			String name = System.getProperty("os.name").toLowerCase();
+			if (name.indexOf("windows") >= 0) {
+				os = "Windows";
+			} else if (name.indexOf("linux") >=0) {
+				os = "Linux";
+			} else {
+				os = "Unknown Oprating System";
+			}
+			
+			return os;
+		}
 	
 	//Methode zur Löschung aller durch die Methode "generatePDF" erzeugten Dateien.
 	//Es wird die von generatePDF bechriebene Datei tempFiles.txt verwendet
@@ -293,22 +309,6 @@ public class ModuleHandbook{
 			files.add(f);
 		}
 		return files;		
-	}
-	
-	//Ermittle das verwendete Betriebssystem (erkennt Windows oder Linux)
-	private String detectOperatingSystem() {
-		String os = "";
-		
-		String name = System.getProperty("os.name").toLowerCase();
-		if (name.indexOf("windows") >= 0) {
-			os = "Windows";
-		} else if (name.indexOf("linux") >=0) {
-			os = "Linux";
-		} else {
-			os = "Unknown Oprating System";
-		}
-		
-		return os;
 	}
 	
 	

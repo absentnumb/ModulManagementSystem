@@ -131,6 +131,41 @@ public class ModulDatabase extends KillConnections {
 		}
 	}
 	
+public LinkedList<ModulKu> loadModuleListDek (int userid){
+		
+
+		PreparedStatement psmt = null;
+		ResultSet data = null;
+
+		try {
+			LinkedList<ModulKu> tmp = new LinkedList<ModulKu>();
+			con.setAutoCommit(false);
+
+			psmt = con.prepareStatement("SELECT id FROM moduldata WHERE responsibleid="+userid);
+			
+			data = psmt.executeQuery();
+			
+
+			while(data.next()){
+				
+				
+				int tmp1 = data.getInt("id");
+				tmp.add(loadModuleKu(tmp1));
+				System.out.println(tmp1);
+			}
+			return tmp;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			closeConnections(data, psmt);
+			
+		}
+	}
+	
 	//holt sich Kurzbeschreibung aus der Datenbank
 	public ModulKu loadModuleKu(int moduleid){
 		
@@ -434,7 +469,7 @@ public class ModulDatabase extends KillConnections {
 						con.close();
 						
 						try {
-							con =  (Connection) DriverManager.getConnection("jdbc:mysql://localhost/test");
+							con =  (Connection) DriverManager.getConnection("jdbc:mysql://localhost/MMS", "root", "root");
 						} catch (SQLException e) {
 							e.printStackTrace();
 						}
@@ -461,7 +496,7 @@ public class ModulDatabase extends KillConnections {
 						*/
 						
 						//Füge den Namen des Faches ein
-						String query2 = "INSERT INTO handbuchname VALUES("+x+",'"+fachname+"');";
+						String query2 = "INSERT INTO handbuchname VALUES("+x+",'"+fachname+"',dekan=null);";
 						psmt = con.prepareStatement(query2);
 						psmt.executeUpdate();
 						

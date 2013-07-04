@@ -12,7 +12,7 @@ import control.ModuleHandbook;
 
 public class ModulhandbuchRequest extends LoginApplication implements Button.ClickListener {
 	
-	Window mod;	
+	private Window mod;	
 	/*Button recommend = new Button("anfordern");
 	Button okay2;
 	VerticalLayout mlist = new VerticalLayout();*/

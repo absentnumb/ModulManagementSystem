@@ -8,11 +8,12 @@ import com.vaadin.ui.*;
 import com.vaadin.ui.themes.BaseTheme;
 import com.vaadin.ui.themes.Runo;
 
+import control.HandbookManager;
 import control.ModuleHandbook;
 
 public class ModulhandbuchRequestAen extends Startseite implements Button.ClickListener {
 	
-	Window mod, newBook; //, selErrW;	
+	private Window mod, newBook; //, selErrW;	
 	/*Button recommend = new Button("anfordern");
 	Button okay2;
 	VerticalLayout mlist = new VerticalLayout();*/
@@ -30,16 +31,18 @@ public class ModulhandbuchRequestAen extends Startseite implements Button.ClickL
 		}
 		tmp = list;
 		tmp2 = ids;
-		mod = new Window("Modul auswählen");
-		start.addWindow(mod);
+		mod = new Window("");
+		mod.setName("M");
+		starta.addWindow(mod);
 		/*mod.setContent(mlist);
 		recommend.addListener(this);*/
 		openModuleList(list);
 		buildMainLayout();
-		recommend.addListener(this);		
+		recommend.addListener(this);
+		create.addListener(this);
 		mod.setContent(mainLayout);
 		//mlist.addComponent(recommend);				
-		Window old = starta.getWindow("main");
+		Window old = starta.getWindow("Startseite");
 		old.open(new ExternalResource(mod.getURL()));
 		//start.removeWindow(old);	
 
@@ -64,13 +67,27 @@ public class ModulhandbuchRequestAen extends Startseite implements Button.ClickL
     	if (event.getButton() == recommend) {
  
 				read =(String) modules.getValue();
-				int i= 0; 
-				int modul = 0; 
-				while(!(read.equals(tmp[i]))){
-					modul = tmp2.get(i);
-					i++;	
+				/*
+				//int i= 0; 
+				//int modul = 1; 
+				do {
+					//i++;
+					//modul = tmp2.get(i);
+					System.out.println("Modul-ID in While:" + modul);	
+				} while(!(read.equals(tmp[i])));
+				*/
+				for (int i = 0; i < tmp2.size(); i++) {
+					System.out.println(tmp2.get(i));
 				}
-					
+				int modul = 0;
+				for (int i = 0; i < tmp.length; i++) {
+					if (read.equals(tmp[i])) {
+						modul = tmp2.get(i-1);
+					}
+				}
+				
+				System.out.println("Modul-ID:" + modul);
+				HandbookManager hbm = new HandbookManager(modul);
 	    
 				
 			
@@ -159,8 +176,11 @@ public class ModulhandbuchRequestAen extends Startseite implements Button.ClickL
 		name = new TextField();
     	Layout selError = new VerticalLayout();
     	
+    	okay2.addListener(this);
+    	
     	newBook.setContent(selError);
     	newBook.addComponent(wrong2);
+    	newBook.addComponent(name);
     	newBook.addComponent(okay2);
     	
     	mod.addWindow(newBook);

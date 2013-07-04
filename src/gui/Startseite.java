@@ -1,5 +1,7 @@
 ﻿package gui;
 
+import java.util.LinkedList;
+
 import objects.Benutzer;
 
 import com.vaadin.terminal.ClassResource;
@@ -18,7 +20,7 @@ import data.BenutzerData;
 public class Startseite implements Button.ClickListener{
 	Window start;
 	Label welcome;
-	Button changeModule, declareDeputy, messages, changes, stichtag, /*viewChangeRequests,*/ changeRights, viewChanges,changeBenutzer, nullButton, logout ;
+	Button changeModule, declareDeputy, messages, changes, stichtag, /*viewChangeRequests,*/ changeRights, viewChanges,changeBenutzer, nullButton, logout, organize ;
 	private AbsoluteLayout mainLayout;
 	private int count;//Zähler für Buttons
 	//Benutzer user;
@@ -83,7 +85,11 @@ public class Startseite implements Button.ClickListener{
 				changeModule.addListener(this);
 				declareDeputy = new Button("Stellvertreter ernennen");
 				declareDeputy.addListener(this);
+							
+				
 			}
+			organize = new Button("Modulhandbuch organisieren");
+			organize.addListener(this);
 			stichtag = new Button("neues Semester erstellen");
 			stichtag.addListener(this);
 			changes = new Button("aktuelle Änderungen");
@@ -228,6 +234,8 @@ public class Startseite implements Button.ClickListener{
 			mainLayout.addComponent(button_10, "top:80.0%;left:35.0%;");
 			
 		}
+		
+		
 
 		return mainLayout;
 	}
@@ -277,6 +285,10 @@ public class Startseite implements Button.ClickListener{
 			Benutzer neu = cont.loadBenutzer(userid);
 			ChangeBenutzerData data = new ChangeBenutzerData(neu);
 		}
+		
+		if (event.getButton() == organize) {
+			contDek.requestModule();
+		}
 	}
 	
 	public Button getButton(){//liefert zurück, welcher Button noch fehlt
@@ -297,27 +309,27 @@ public class Startseite implements Button.ClickListener{
 			count++;
 			if(changes!=null) return changes;			
 		}
-		/*if (count==4){
-			count++;
-			if(viewChangeRequests!=null) return viewChangeRequests;			
-		}*/
 		if (count==4){
 			count++;
-			if(changeRights!=null) return changeRights;			
+			if(organize!=null) return organize;			
 		}
 		if (count==5){
 			count++;
-			if(viewChanges!=null) return viewChanges;			
+			if(changeRights!=null) return changeRights;			
 		}
 		if (count==6){
 			count++;
+			if(viewChanges!=null) return viewChanges;			
+		}
+		if (count==7){
+			count++;
 			if(stichtag!=null) return stichtag;			
 		}
-		if(count==7){
+		if(count==8){
 			count++;
 			if(changeBenutzer!=null) return changeBenutzer;
 		}
-		if (count==8){
+		if (count==9){
 			count++;
 			if(logout!=null) return logout;
 			

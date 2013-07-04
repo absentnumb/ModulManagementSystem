@@ -13,8 +13,12 @@ public class ModuleTable {
 	ModulDatabase m;
 	Table modules;
 	
-	//TODO Konstrukor erstellen, der dozId erwartet
-	int dozId = 1;	
+	//TODO Konstrukor erstellen, der dekId erwartet
+	int dekId;
+	
+	public ModuleTable(int _dekId) {
+		dekId = _dekId;
+	}
 	
 	public Table generateTable() {
 		
@@ -34,7 +38,7 @@ public class ModuleTable {
 		//modules.addItem(new Object[] {new Integer(45), "Test"}, new Integer(1));
 		
 		//Trage alle nicht zugeordneten Module in die Tabelle ein
-		LinkedList<ModulKu> list = m.loadModuleList(dozId);
+		LinkedList<ModulKu> list = m.loadModuleListDek(dekId);
 		for (int i = 0; i < list.size(); i++) {
 			int x = list.get(i).getid();
 			modules.addItem(new Object[] {new Integer(x), m.getModulname(x)}, new Integer(i+1));

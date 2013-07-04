@@ -103,7 +103,8 @@ public class HandbookManager_View extends Startseite {
 		tablePanel12 = new Panel();
 		tablePanel12.setContent(new VerticalLayout());
 		
-		mta = new ModuleTable();
+		mta = new ModuleTable(userid);
+		System.out.println("User-ID:" + userid);
 		modules = mta.generateTable();
 		tablePanel12.addComponent(modules);
 		
@@ -116,7 +117,7 @@ public class HandbookManager_View extends Startseite {
 		w.addComponent(tablePanel1);
 		
 				
-		Window old = starta.getWindow("Startseite");
+		Window old = starta.getWindow("M");
 		old.open(new ExternalResource(w.getURL()));
 		
 	}

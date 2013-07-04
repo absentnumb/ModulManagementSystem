@@ -18,8 +18,8 @@ public class BookName extends KillConnections {
 	private static final String GETBOOKIDS = "SELECT ID FROM handbuchname";
 	private static final String GETBOOKNAMESD = "SELECT name FROM handbuchname WHERE dekan=?";
 	private static final String GETBOOKIDSD = "SELECT ID FROM handbuchname WHERE dekan=?";
-	private static final String NEWHAND ="INSERT INTO handbookname VALUES(?,?,?)";
-	private static final String GETNEWID = "SELECT id FROM handbookname ORDER BY id DESC LIMIT 1";
+	private static final String NEWHAND ="INSERT INTO handbuchname VALUES(?,?,?)";
+	private static final String GETNEWID = "SELECT id FROM handbuchname ORDER BY id DESC LIMIT 1";
 
 	
 	public BookName(){
