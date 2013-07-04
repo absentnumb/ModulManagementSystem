@@ -18,7 +18,7 @@ import data.BenutzerData;
 public class Startseite implements Button.ClickListener{
 	Window start;
 	Label welcome;
-	Button changeModule, declareDeputy, messages, changes, stichtag, viewChangeRequests, changeRights, viewChanges,changeBenutzer, nullButton, logout ;
+	Button changeModule, declareDeputy, messages, changes, stichtag, /*viewChangeRequests,*/ changeRights, viewChanges,changeBenutzer, nullButton, logout ;
 	private AbsoluteLayout mainLayout;
 	private int count;//Zähler für Buttons
 	//Benutzer user;
@@ -95,11 +95,11 @@ public class Startseite implements Button.ClickListener{
 			//if(!cont.getDozent(userid)) start.addComponent(declareDeputy);		
 			
 		}
-		if(cont.getDez2(userid)){
+		/*if(cont.getDez2(userid)){
 			viewChangeRequests = new Button("aktuelle Änderungsanträge");
 			viewChangeRequests.addListener(this);
 			//start.addComponent(viewChangeRequests);
-		}		
+		}*/		
 		changeBenutzer = new Button("Persönliche Daten ändern");
 		changeBenutzer.addListener(this);
 		
@@ -209,7 +209,7 @@ public class Startseite implements Button.ClickListener{
 			mainLayout.addComponent(button_8, "top:70.0%;left:35.0%;");
 		}
 		
-		// button_8
+		// button_9
 		button_9 = getButton();  
 		if(button_9!=nullButton){
 			button_9.setWidth("-1px");
@@ -218,12 +218,14 @@ public class Startseite implements Button.ClickListener{
 			mainLayout.addComponent(button_9, "top:75.0%;left:35.0%;");
 			
 		}
+		
+		// button_10
 		button_10 = getButton();  
 		if(button_10!=nullButton){
 			button_10.setWidth("-1px");
 			button_10.setHeight("-1px");
 			button_10.setStyleName(BaseTheme.BUTTON_LINK);
-			mainLayout.addComponent(button_10, "top:75.0%;left:35.0%;");
+			mainLayout.addComponent(button_10, "top:80.0%;left:35.0%;");
 			
 		}
 
@@ -251,9 +253,9 @@ public class Startseite implements Button.ClickListener{
 			cont.loadNewMessageList();//Dozent
 		}
 				
-		if(event.getButton() == viewChangeRequests){
+		/*if(event.getButton() == viewChangeRequests){
 			//Dezernat 2
-		}
+		}*/
 		
 		if(event.getButton()== changeRights){
 			//Administrator
@@ -295,27 +297,27 @@ public class Startseite implements Button.ClickListener{
 			count++;
 			if(changes!=null) return changes;			
 		}
-		if (count==4){
+		/*if (count==4){
 			count++;
 			if(viewChangeRequests!=null) return viewChangeRequests;			
-		}
-		if (count==5){
+		}*/
+		if (count==4){
 			count++;
 			if(changeRights!=null) return changeRights;			
 		}
-		if (count==6){
+		if (count==5){
 			count++;
 			if(viewChanges!=null) return viewChanges;			
 		}
-		if (count==7){
+		if (count==6){
 			count++;
 			if(stichtag!=null) return stichtag;			
 		}
-		if(count==8){
+		if(count==7){
 			count++;
 			if(changeBenutzer!=null) return changeBenutzer;
 		}
-		if (count==9){
+		if (count==8){
 			count++;
 			if(logout!=null) return logout;
 			

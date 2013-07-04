@@ -528,7 +528,7 @@ public class BenutzerData extends KillConnections {
 			psmt.setString(4, neu.getEmail());
 			psmt.setBoolean(5, neu.isDozent());
 			psmt.setBoolean(6, neu.isDekan());
-			psmt.setBoolean(7, neu.isDez2());
+			//psmt.setBoolean(7, neu.isDez2());
 			psmt.setBoolean(8, neu.isAdmin());
 			psmt.setBoolean(9, neu.isStell());
 			psmt.setInt(10, neu.getStellid());
@@ -639,7 +639,7 @@ public Benutzer loadBenutzer(int user){
 		String pw = data.getString("pw");
 		String email = data.getString("email");
 		boolean dozent = data.getBoolean("dozent");
-		boolean dekan = data.getBoolean("dekan");
+		//boolean dekan = data.getBoolean("dekan");
 		boolean dez2 = data.getBoolean("dez2");
 		boolean admin = data.getBoolean("admin");
 		boolean stell = data.getBoolean("stell");
@@ -647,7 +647,7 @@ public Benutzer loadBenutzer(int user){
 		int stellid = data.getInt("stellid");
 
 		
-		Benutzer tmp = new Benutzer(id, name, email, pw , dozent, dekan, dez2,
+		Benutzer tmp = new Benutzer(id, name, email, pw , dozent, /*dekan,*/ dez2,
 				  admin, stell, stellid);
 		return tmp;
 

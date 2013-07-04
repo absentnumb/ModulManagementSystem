@@ -61,13 +61,13 @@ public class Controller {
 		int Id;
 		Id = blarghs.getID(Name);
 		
-		if(blarghs.getRangDozent(Id) && blarghs.getRangDekan(Id) && blarghs.getRangDez2(Id)){rangname="[Dozent, Dekan, Dezernat 2]"; return rangname;}
+		//if(blarghs.getRangDozent(Id) && blarghs.getRangDekan(Id) && blarghs.getRangDez2(Id)){rangname="[Dozent, Dekan, Dezernat 2]"; return rangname;}
 		if(blarghs.getRangDozent(Id) && blarghs.getRangDekan(Id)){rangname="[Dozent, Dekan]"; return rangname;}
-		if(blarghs.getRangDozent(Id) && blarghs.getRangDez2(Id)){rangname="[Dozent, Dezernat 2]"; return rangname;}
-		if(blarghs.getRangDekan(Id) && blarghs.getRangDez2(Id)){rangname="[Dekan, Dezernat 2]"; return rangname;}
+		//if(blarghs.getRangDozent(Id) && blarghs.getRangDez2(Id)){rangname="[Dozent, Dezernat 2]"; return rangname;}
+		//if(blarghs.getRangDekan(Id) && blarghs.getRangDez2(Id)){rangname="[Dekan, Dezernat 2]"; return rangname;}
 		if(blarghs.getRangDozent(Id)){rangname="Dozent"; return rangname;}
 		if(blarghs.getRangDekan(Id)){rangname="Dekan"; return rangname;}
-		if (blarghs.getRangDez2(Id)){rangname="Dezernat 2"; return rangname;}
+		//if (blarghs.getRangDez2(Id)){rangname="Dezernat 2"; return rangname;}
 		return rangname;
 		
 	}
@@ -107,11 +107,11 @@ public class Controller {
 		else return false;
 	}
 		
-	public boolean getDez2(int id){
+	/*public boolean getDez2(int id){
 		if(blarghs.getRangDez2(id))return true;
 		else if(blarghs.getStellDez2(id))return true;
 		else return false;
-	}
+	}*/
 	
 	//gibt neuen Rang an Datenbankklasse weiter, um diesen zu speichern
 	public void aenderungSpeichern(String Name, String Rang){
@@ -160,7 +160,7 @@ public class Controller {
 		int stellid = 0;
 		int id = blarghs.getNewId();
 		
-		Benutzer test = new Benutzer(id, us, em, p1, dozent, dekan, dez2, admin, stell, stellid);
+		Benutzer test = new Benutzer(id, us, em, p1, dozent, dekan, /*dez2,*/ admin, stell, stellid);
 		blarghs.newUser(test);
 	}
 

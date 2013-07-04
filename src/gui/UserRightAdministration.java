@@ -73,14 +73,14 @@ public class UserRightAdministration extends Startseite implements Button.ClickL
 		
 		group.addItem("Dozent");
 		group.addItem("Dekan");
-		group.addItem("Dezernat 2");
+		//group.addItem("Dezernat 2");
 		if (Rang == "Benutzer" ){
 			//kein Rang verteilt
 		}
 		else{
 			if(Rang.contains("Dozent")) group.select("Dozent");
 			if(Rang.contains("Dekan")) group.select("Dekan");
-			if(Rang.contains("Dezernat 2")) group.select("Dezernat 2");
+			//if(Rang.contains("Dezernat 2")) group.select("Dezernat 2");
 		}
 			/*if(Rang == "[Dozent, Dekan]"){
 				group.select("Dekan");
