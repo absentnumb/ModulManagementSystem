@@ -31,7 +31,7 @@ public class NewMessage extends Startseite implements Button.ClickListener {
 	public NewMessage(LinkedList<Nachricht>lis){
 		this.lis = lis;
 		
-		Window test = starta.getWindow("Aenderungsantraege");
+		Window test = starta.getWindow("Nachrichten");
 		if(test != null){
 			starta.removeWindow(test);	
 		}
