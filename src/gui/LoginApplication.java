@@ -90,7 +90,11 @@ public class LoginApplication extends Application implements Button.ClickListene
     		
     		if (us.equals("")||em.equals("")||p1.equals("")||p2.equals("") ||!(p1.equals(p2))) {
     			registerError();
+    		}
+    		else if (control.doesNameExist(us)){
+    			InfoWindow nameEx = new InfoWindow("Fehler","Dieser Nutzername existiert bereits",mainWindow);
     		}else {
+    		
     		control.register(us, em, p1);
     		mainWindow.removeWindow(regW);
     		}

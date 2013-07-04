@@ -201,4 +201,12 @@ public class Controller {
 		LinkedList<Nachricht> list = nachrichtenData.loadNewBenachrichtList(userid);
 		NewMessage newMessages = new NewMessage(list);
 	}
+	
+	public boolean doesNameExist(String name){
+		String[] liste = blarghs.getBenutzerListe();
+		for (int i = 0;i<liste.length;i++){
+			if(liste[i].equals(name))return true;
+		}
+		return false;
+	}
 }
