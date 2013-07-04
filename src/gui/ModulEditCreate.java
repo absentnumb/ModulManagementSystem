@@ -32,93 +32,13 @@ public class ModulEditCreate extends Startseite implements Button.ClickListener{
 		starta.addWindow(createW);
 		in=b;
 		buildMainLayout();
-		
-		/*Label l1 = new Label("Modul bearbeiten");
-		createW.addComponent(l1); 
-		title = new TextArea("Name:");
-		title.setValue(b.gettitle());
-		 createW.addComponent(title);
-		 
-		 lp = new TextArea("Leistungspunkte:");
-		 lp.setValue(String.valueOf(b.getlp()));
-		 createW.addComponent(lp);
-		 
-		 language = new TextArea("Sprache:");
-		 language.setValue(b.getlanguage());
-		 createW.addComponent(language);
-		 
-		 turn= new TextArea("Rytmus:"); 
-		 turn.setValue(b.getturn());
-		 createW.addComponent(turn);
-		 
-		 responsibleid = new TextArea(":");
-		 responsibleid.setValue(String.valueOf(b.getresponsibleid()));
-		 createW.addComponent(responsibleid);
-		 // direkte umsetzung von name in id wär schön
-		 responsible = new TextArea("Dekan:");
-		 responsible.setValue(b.getresponsible());
-		 createW.addComponent(responsible);
-		 
-		 dozid = new TextArea("");
-		 dozid.setValue(String.valueOf(b.getdozid()));
-		 createW.addComponent(dozid);
-		 
-		 doz = new TextArea("Dozent:");
-		 doz.setValue(b.getdoz());
-		 createW.addComponent(doz); 
-		 
-		filing = new TextArea("Einordnung:");
-		filing.setValue(b.getfiling());
-		 createW.addComponent(filing);
-		 
-		 requirements = new TextArea("Verausetzungen:");
-		 requirements.setValue(b.getrequirements());
-		  createW.addComponent(requirements);
-		  
-		 aims = new TextArea("Lernziele");
-		 aims.setValue(b.getaims());
-		  createW.addComponent(aims);
-		  
-		 content = new TextArea("Inhalt:");
-		 content.setValue(b.getcontent());
-		 createW.addComponent(content);
-		 
-		 lit = new TextArea("Literatur:");
-		 lit.setValue(b.getlit());
-		 createW.addComponent(lit);
-		 
-		 events = new TextArea("Lehreveranstaltungen:");
-		 events.setValue(b.getevents());
-		 createW.addComponent(events);
-		 
-		 work = new TextArea("Arbeitsaufwand:");
-		 work.setValue(b.getwork());
-		 createW.addComponent(work);
-		 
-		 exams = new TextArea("Leistungsnachweis:");
-		 exams.setValue(b.getexams());
-		 createW.addComponent(exams);
-		 
-		 formcond = new TextArea("Voraussetzungen formal:");
-		 formcond.setValue(b.getformcond());
-		 createW.addComponent(formcond);
-		 
-		 grades = new TextArea("Notenbildung:");
-		 grades.setValue(b.getgrades());
-		 createW.addComponent(grades);
-		 
-		 save = new Button("speichern");
-		 createW.addComponent(save);*/
 		createW.setContent(mainLayout);
-		 save.addListener(this);
-		 logout.addListener(this);
-		 tmp = b;
-		 Window old = starta.getWindow("Modulbearbeiten");
-		 oldURL = old.getURL();
-		 old.open(new ExternalResource(createW.getURL()));
-			//starta.removeWindow(old);	
-
-		 
+		save.addListener(this);
+		logout.addListener(this);
+		tmp = b;
+		Window old = starta.getWindow("Modulbearbeiten");
+		oldURL = old.getURL();
+		old.open(new ExternalResource(createW.getURL()));			 
 	}
 
 	//ButtonListener
@@ -146,20 +66,22 @@ public class ModulEditCreate extends Startseite implements Button.ClickListener{
 			
 			int lp2 = Integer.parseInt(lp1);
 		
+			if(!cont.rangAusgeben(responsible1).contains("Dekan"))
+				displayError("Den angegebenen Dekan gibt es nicht");
 			
+			else if(!cont.rangAusgeben(doz1).contains("Dozent"))
+				displayError("Den angegebenen Dozent gibt es nicht");
 			
-			
-			
-			Modul tmp1 = new Modul(tmp.getid(), title1, lp2, language1, turn1, cont.getID(responsible1), 
+			else{
+				Modul tmp1 = new Modul(tmp.getid(), title1, lp2, language1, turn1, cont.getID(responsible1), 
 							responsible1, cont.getID(doz1), doz1,filing1, requirements1, aims1, 
 							content1, lit1, events1, work1, exams1, formcond1, grades1 );
-			//System.out.println(tmp1.gettitle());
-			contD.speichernModul(tmp1);//Methode in Controller-Klasse
+				//System.out.println(tmp1.gettitle());
+				contD.speichernModul(tmp1);//Methode in Controller-Klasse
+			}
 			}
 			catch(Exception e){
-			displayError("Bitte Felder mit * ausfüllen");	
-
-				
+			displayError("Bitte Felder mit * ausfüllen. Leistungspunkte bitte als Zahl angeben.");				
 			}
 			//finally{
 				
