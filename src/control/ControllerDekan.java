@@ -64,7 +64,12 @@ public class ControllerDekan extends Controller{
 	public void loadRequestlist(){
 
 		LinkedList<Nachricht> list = nachrichtenData.loadBenachrichtList(userid);
+		LinkedList<Nachricht> listStell = nachrichtenData.loadBenachrichtList(blarghs.getStellID(userid));
 		LinkedList<ModulKu> list2 = new LinkedList<ModulKu>();
+		
+		for(int i = 0; i<listStell.size();i++){
+			list.add(listStell.get(i));
+		}
 		
 		for (int i =0; i<list.size(); i++){
 			
